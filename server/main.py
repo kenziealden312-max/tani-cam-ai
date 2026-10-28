@@ -1,10 +1,12 @@
+
 import os
-import json
-import urllib.request
-import urllib.error
+import base64
+import mimetypes
 
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from google import genai
+from google.genai import types
 
 app = FastAPI(title="TaniCam AI")
 
@@ -26,34 +28,22 @@ def health():
 @app.post("/analyze")
 async def analyze(image: UploadFile = File(...)):
     api_key = os.getenv("GEMINI_API_KEY")
-
     if not api_key:
         raise HTTPException(
             status_code=500,
-            detail="API key Gemini belum dipasang di server."
+            detail="API key Gemini belum dipasang di Render."
         )
 
     mime_type = image.content_type or ""
-
-    if mime_type not in [
-        "image/jpeg",
-        "image/png",
-        "image/webp",
-        "image/heic",
-        "image/heif",
-    ]:
+    if mime_type not in ["image/jpeg", "image/png", "image/webp"]:
         raise HTTPException(
             status_code=400,
             detail="Gunakan foto JPG, PNG, atau WEBP."
         )
 
     data = await image.read()
-
     if not data:
-        raise HTTPException(
-            status_code=400,
-            detail="Foto kosong. Silakan pilih foto lagi."
-        )
+        raise HTTPException(status_code=400, detail="Foto kosong.")
 
     if len(data) > 10 * 1024 * 1024:
         raise HTTPException(
@@ -61,65 +51,44 @@ async def analyze(image: UploadFile = File(...)):
             detail="Ukuran foto maksimal 10 MB."
         )
 
-    import base64
-
     prompt = """
-    Kamu adalah asisten analisis kesehatan tanaman untuk petani Indonesia.
-    Periksa foto tanaman yang diberikan dan jawab dalam bahasa Indonesia
-    yang sederhana.
+Kamu adalah asisten analisis kesehatan tanaman untuk petani Indonesia.
+Analisis foto dan jawab dalam bahasa Indonesia sederhana dengan format:
+1. Jenis tanaman yang terlihat
+2. Gejala yang benar-benar terlihat
+3. Dugaan penyakit atau hama, jika ada
+4. Tingkat keyakinan: rendah, sedang, atau tinggi
+5. Langkah penanganan awal yang aman dan praktis
+6. Cara mencegah masalah berulang
 
-    Berikan hasil dengan format:
-    1. Tanaman yang terlihat
-    2. Kondisi yang terlihat pada foto
-    3. Dugaan penyakit atau hama, jika ada
-    4. Tingkat keyakinan: rendah, sedang, atau tinggi
-    5. Saran penanganan awal yang aman dan praktis
-    6. Cara mencegah masalah berulang
-
-    Jangan memastikan diagnosis jika bukti visual tidak cukup.
-    Jika foto tidak menunjukkan tanaman dengan jelas, katakan demikian.
-    Jangan mengarang gejala. Utamakan langkah yang aman dan sesuai
-    untuk petani. Jika perlu, sarankan pemeriksaan oleh penyuluh pertanian.
-    """
-
-    payload = {
-        "model": "gemini-3.5-flash-lite",
-        "input": [
-            {"type": "text", "text": prompt},
-            {
-                "type": "image",
-                "data": base64.b64encode(data).decode("utf-8"),
-                "mime_type": mime_type,
-            },
-        ],
-    }
-
-    request = urllib.request.Request(
-        "https://generativelanguage.googleapis.com/v1beta/interactions",
-        data=json.dumps(payload).encode("utf-8"),
-        headers={
-            "Content-Type": "application/json",
-            "x-goog-api-key": api_key,
-        },
-        method="POST",
-    )
+Jangan memastikan diagnosis jika bukti foto tidak cukup.
+Jangan mengarang gejala. Jika foto tidak jelas atau bukan tanaman,
+jelaskan hal itu. Untuk masalah serius, sarankan konsultasi dengan
+penyuluh pertanian setempat.
+"""
 
     try:
-        with urllib.request.urlopen(request, timeout=90) as response:
-            result = json.loads(response.read().decode("utf-8"))
+        client = genai.Client(api_key=api_key)
 
-        analysis = result.get("output_text")
+        interaction = client.interactions.create(
+            model="gemini-3.8-flash",
+            input=[
+                {"type": "text", "text": prompt},
+                {
+                    "type": "image",
+                    "data": base64.b64encode(data).decode("utf-8"),
+                    "mime_type": mime_type,
+                },
+            ],
+            store=False,
+        )
 
-        if not analysis:
-            for item in result.get("outputs", []):
-                if item.get("type") == "text":
-                    analysis = item.get("text")
-                    break
+        analysis = interaction.output_text
 
         if not analysis:
             raise HTTPException(
                 status_code=502,
-                detail="AI belum memberikan hasil. Coba lagi."
+                detail="Gemini belum memberikan hasil. Coba lagi."
             )
 
         return {
@@ -128,14 +97,11 @@ async def analyze(image: UploadFile = File(...)):
             "analysis": analysis,
         }
 
-    except urllib.error.HTTPError as error:
-        print("Gemini API HTTP error:", error.code)
+    except HTTPException:
+        raise
+    except Exception as error:
+        print("Gemini analysis error:", type(error).__name__, str(error))
         raise HTTPException(
             status_code=502,
-            detail="Gemini gagal menganalisis foto. Periksa konfigurasi API."
+            detail="Analisis gagal. Periksa Runtime Logs di Render."
         )
-    except urllib.error.URLError:
-        raise HTTPException(
-            status_code=502,
-            detail="Server tidak dapat terhubung ke layanan Gemini."
-)
