@@ -1,4 +1,4 @@
-
 fastapi
 uvicorn[standard]
 python-multipart
+google-genai>=2.3.0
