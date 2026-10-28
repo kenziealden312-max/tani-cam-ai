@@ -83,7 +83,7 @@ async def analyze(image: UploadFile = File(...)):
     """
 
     payload = {
-        "model": "gemini-3.8-flash",
+        "model": "gemini-3.5-flash-lite",
         "input": [
             {"type": "text", "text": prompt},
             {
