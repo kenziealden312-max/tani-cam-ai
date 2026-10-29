@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#166534">
+  <title>TaniCam AI - Asisten Tanaman</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f0fdf4;
+      color: #17351f;
+    }
+    header {
+      background: #166534;
+      color: white;
+      padding: 24px 18px;
+      text-align: center;
+    }
+    header h1 { margin: 0 0 8px; }
+    header p { margin: 0; line-height: 1.5; }
+    main {
+      max-width: 600px;
+      margin: 22px auto;
+      padding: 0 15px 30px;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 3px 14px #0000000d;
+      margin-bottom: 16px;
+    }
+    label { display: block; font-weight: bold; margin-bottom: 12px; }
+    input[type=file] { width: 100%; margin-bottom: 16px; }
+    img {
+      width: 100%;
+      max-height: 320px;
+      object-fit: contain;
+      border-radius: 10px;
+      display: none;
+      margin-bottom: 16px;
+      background: #f3f4f6;
+    }
+    button {
+      width: 100%;
+      border: 0;
+      border-radius: 10px;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    #analyzeBtn { background: #15803d; color: white; }
+    #analyzeBtn:disabled { opacity: .6; }
+    #status { margin-top: 14px; line-height: 1.5; }
+    #result { white-space: pre-wrap; line-height: 1.7; }
+    .note { font-size: 13px; color: #52645a; line-height: 1.5; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>TaniCam AI</h1>
+    <p>Asisten cerdas untuk membantu memeriksa kondisi tanaman.</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Periksa Tanaman</h2>
+      <p>Pilih foto daun atau tanaman yang ingin diperiksa.</p>
+
+      <label for="photo">Foto tanaman</label>
+      <input id="photo" type="file" accept="image/jpeg,image/png,image/webp" capture="environment">
+      <img id="preview" alt="Pratinjau foto tanaman">
+
+      <button id="analyzeBtn" type="button">Analisis Tanaman</button>
+      <p id="status" role="status"></p>
+      <p class="note">Gunakan foto yang jelas. Hasil AI adalah dugaan awal, bukan diagnosis pasti.</p>
+    </section>
+
+    <section class="card" id="resultCard" hidden>
+      <h2>Hasil Analisis</h2>
+      <div id="result"></div>
+    </section>
+  </main>
+
+  <script>
+    const API_URL = "https://tani-cam-ai.onrender.com/analyze";
+    const photo = document.getElementById("photo");
+    const preview = document.getElementById("preview");
+    const button = document.getElementById("analyzeBtn");
+    const status = document.getElementById("status");
+    const resultCard = document.getElementById("resultCard");
+    const result = document.getElementById("result");
+    let previewUrl = null;
+
+    photo.addEventListener("change", () => {
+      const file = photo.files[0];
+      resultCard.hidden = true;
+      status.textContent = "";
+
+      if (previewUrl) URL.revokeObjectURL(previewUrl);
+
+      if (!file) {
+        preview.style.display = "none";
+        return;
+      }
+
+      if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
+        photo.value = "";
+        preview.style.display = "none";
+        status.textContent = "Pilih foto JPG, PNG, atau WEBP.";
+        return;
+      }
+
+      if (file.size > 10 * 1024 * 1024) {
+        photo.value = "";
+        preview.style.display = "none";
+        status.textContent = "Ukuran foto maksimal 10 MB.";
+        return;
+      }
+
+      previewUrl = URL.createObjectURL(file);
+      preview.src = previewUrl;
+      preview.style.display = "block";
+    });
+
+    button.addEventListener("click", async () => {
+      const file = photo.files[0];
+
+      if (!file) {
+        status.textContent = "Pilih foto tanaman terlebih dahulu.";
+        return;
+      }
+
+      button.disabled = true;
+      status.textContent = "Sedang menganalisis foto. Mohon tunggu...";
+      resultCard.hidden = true;
+
+      try {
+        const formData = new FormData();
+        formData.append("image", file);
+
+        const response = await fetch(API_URL, {
+          method: "POST",
+          body: formData
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.detail || "Analisis gagal. Silakan coba lagi.");
+        }
+
+        result.textContent = data.analysis || "AI belum memberikan hasil.";
+        resultCard.hidden = false;
+        status.textContent = "Analisis selesai.";
+      } catch (error) {
+        status.textContent =
+          error.message || "Koneksi gagal. Coba lagi beberapa saat.";
+      } finally {
+        button.disabled = false;
+      }
+    });
+  </script>
+</body>
+                                       </html>
+      
