@@ -3,7 +3,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#166534">
   <title>TaniCam AI - Asisten Tanaman</title>
   <style>
@@ -13,6 +13,7 @@
       font-family: Arial, sans-serif;
       background: #f0fdf4;
       color: #17351f;
+      line-height: 1.6;
     }
     header {
       background: #166534;
@@ -20,8 +21,8 @@
       padding: 24px 18px;
       text-align: center;
     }
-    header h1 { margin: 0 0 8px; }
-    header p { margin: 0; line-height: 1.5; }
+    header h1 { margin: 0 0 8px; font-size: 30px; }
+    header p { margin: 0; }
     main {
       max-width: 600px;
       margin: 22px auto;
@@ -29,36 +30,58 @@
     }
     .card {
       background: white;
-      padding: 20px;
-      border-radius: 16px;
-      box-shadow: 0 3px 14px #0000000d;
-      margin-bottom: 16px;
+      border-radius: 20px;
+      padding: 22px;
+      margin-bottom: 18px;
+      box-shadow: 0 5px 20px #14532d12;
     }
-    label { display: block; font-weight: bold; margin-bottom: 12px; }
-    input[type=file] { width: 100%; margin-bottom: 16px; }
-    img {
+    h2 { margin-top: 0; font-size: 23px; }
+    label {
+      display: block;
+      font-weight: bold;
+      margin: 15px 0 8px;
+    }
+    input[type="file"] {
+      display: block;
       width: 100%;
-      max-height: 320px;
-      object-fit: contain;
-      border-radius: 10px;
+      margin: 10px 0 16px;
+      font-size: 14px;
+    }
+    #preview {
       display: none;
-      margin-bottom: 16px;
+      width: 100%;
+      max-height: 350px;
+      object-fit: contain;
+      border-radius: 12px;
+      margin: 12px 0;
       background: #f3f4f6;
     }
     button {
       width: 100%;
+      padding: 14px;
       border: 0;
       border-radius: 10px;
-      padding: 14px;
-      font-size: 16px;
+      background: #15803d;
+      color: white;
+      font-size: 17px;
       font-weight: bold;
       cursor: pointer;
     }
-    #analyzeBtn { background: #15803d; color: white; }
-    #analyzeBtn:disabled { opacity: .6; }
-    #status { margin-top: 14px; line-height: 1.5; }
-    #result { white-space: pre-wrap; line-height: 1.7; }
-    .note { font-size: 13px; color: #52645a; line-height: 1.5; }
+    button:disabled { opacity: .6; }
+    #status { font-size: 14px; color: #52645a; }
+    #result {
+      overflow-wrap: anywhere;
+      font-size: 15px;
+    }
+    #result h3 {
+      color: #166534;
+      font-size: 17px;
+      margin: 20px 0 8px;
+    }
+    #result p { margin: 8px 0; }
+    #result ul { padding-left: 22px; }
+    .note { color: #64748b; font-size: 13px; }
+    [hidden] { display: none !important; }
   </style>
 </head>
 <body>
@@ -72,13 +95,22 @@
       <h2>Periksa Tanaman</h2>
       <p>Pilih foto daun atau tanaman yang ingin diperiksa.</p>
 
-      <label for="photo">Foto tanaman</label>
-      <input id="photo" type="file" accept="image/jpeg,image/png,image/webp" capture="environment">
+      <label for="image">Foto tanaman</label>
+      <input
+        id="image"
+        type="file"
+        accept="image/jpeg,image/png,image/webp"
+        capture="environment"
+      >
+
       <img id="preview" alt="Pratinjau foto tanaman">
 
-      <button id="analyzeBtn" type="button">Analisis Tanaman</button>
-      <p id="status" role="status"></p>
-      <p class="note">Gunakan foto yang jelas. Hasil AI adalah dugaan awal, bukan diagnosis pasti.</p>
+      <button id="analyze" type="button">Analisis Tanaman</button>
+      <p id="status" role="status" aria-live="polite"></p>
+      <p class="note">
+        Gunakan foto yang jelas. Hasil AI adalah dugaan awal,
+        bukan diagnosis pasti.
+      </p>
     </section>
 
     <section class="card" id="resultCard" hidden>
@@ -89,55 +121,75 @@
 
   <script>
     const API_URL = "https://tani-cam-ai.onrender.com/analyze";
-    const photo = document.getElementById("photo");
+    const imageInput = document.getElementById("image");
     const preview = document.getElementById("preview");
-    const button = document.getElementById("analyzeBtn");
+    const button = document.getElementById("analyze");
     const status = document.getElementById("status");
     const resultCard = document.getElementById("resultCard");
     const result = document.getElementById("result");
-    let previewUrl = null;
 
-    photo.addEventListener("change", () => {
-      const file = photo.files[0];
-      resultCard.hidden = true;
-      status.textContent = "";
-
-      if (previewUrl) URL.revokeObjectURL(previewUrl);
-
-      if (!file) {
-        preview.style.display = "none";
-        return;
+    imageInput.addEventListener("change", () => {
+      const file = imageInput.files[0];
+      preview.style.display = file ? "block" : "none";
+      if (file) {
+        preview.src = URL.createObjectURL(file);
+        status.textContent = "";
       }
-
-      if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
-        photo.value = "";
-        preview.style.display = "none";
-        status.textContent = "Pilih foto JPG, PNG, atau WEBP.";
-        return;
-      }
-
-      if (file.size > 10 * 1024 * 1024) {
-        photo.value = "";
-        preview.style.display = "none";
-        status.textContent = "Ukuran foto maksimal 10 MB.";
-        return;
-      }
-
-      previewUrl = URL.createObjectURL(file);
-      preview.src = previewUrl;
-      preview.style.display = "block";
     });
 
+    function showAnalysis(text) {
+      const safe = text.replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+
+      const lines = safe.split(/\r?\n/);
+      result.innerHTML = "";
+
+      lines.forEach(line => {
+        let value = line.trim();
+        if (!value) return;
+
+        value = value
+          .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+          .replace(/\*(.*?)\*/g, "<em>$1</em>");
+
+        const heading = value.match(
+          /^\**\s*\d+\.\s*(.*?)\**$/
+        );
+
+        if (heading && !value.includes(":**")) {
+          const h = document.createElement("h3");
+          h.innerHTML = value.replace(
+            /^\**\s*\d+\.\s*/,
+            ""
+          ).replace(/\**$/, "");
+          result.appendChild(h);
+        } else {
+          const p = document.createElement("p");
+          p.innerHTML = value
+            .replace(/^\*\s*/, "• ")
+            .replace(/^\-\s*/, "• ");
+          result.appendChild(p);
+        }
+      });
+    }
+
     button.addEventListener("click", async () => {
-      const file = photo.files[0];
+      const file = imageInput.files[0];
 
       if (!file) {
         status.textContent = "Pilih foto tanaman terlebih dahulu.";
         return;
       }
 
+      if (file.size > 10 * 1024 * 1024) {
+        status.textContent = "Ukuran foto maksimal 10 MB.";
+        return;
+      }
+
       button.disabled = true;
-      status.textContent = "Sedang menganalisis foto. Mohon tunggu...";
+      button.textContent = "Sedang Menganalisis...";
+      status.textContent = "Foto sedang diperiksa oleh AI...";
       resultCard.hidden = true;
 
       try {
@@ -152,20 +204,26 @@
         const data = await response.json();
 
         if (!response.ok) {
-          throw new Error(data.detail || "Analisis gagal. Silakan coba lagi.");
+          throw new Error(
+            data.detail || "Analisis gagal. Silakan coba lagi."
+          );
         }
 
-        result.textContent = data.analysis || "AI belum memberikan hasil.";
+        if (!data.analysis) {
+          throw new Error("AI belum memberikan hasil.");
+        }
+
+        showAnalysis(data.analysis);
         resultCard.hidden = false;
         status.textContent = "Analisis selesai.";
       } catch (error) {
         status.textContent =
-          error.message || "Koneksi gagal. Coba lagi beberapa saat.";
+          error.message || "Koneksi gagal. Coba lagi.";
       } finally {
         button.disabled = false;
+        button.textContent = "Analisis Tanaman";
       }
     });
   </script>
 </body>
-                                       </html>
-      
+</html>
