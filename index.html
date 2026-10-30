@@ -1,293 +1,221 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#166534">
-  <title>TaniCam AI - Asisten Tanaman</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f0fdf4;
-      color: #17351f;
-      line-height: 1.6;
-    }
-    header {
-      background: #166534;
-      color: white;
-      padding: 24px 18px;
-      text-align: center;
-    }
-    header h1 { margin: 0 0 8px; font-size: 30px; }
-    header p { margin: 0; }
-    main {
-      max-width: 600px;
-      margin: 22px auto;
-      padding: 0 15px 30px;
-    }
-    .card {
-      background: white;
-      border-radius: 20px;
-      padding: 22px;
-      margin-bottom: 18px;
-      box-shadow: 0 5px 20px #14532d12;
-    }
-    h2 { margin-top: 0; font-size: 23px; }
-    label {
-      display: block;
-      font-weight: bold;
-      margin: 15px 0 8px;
-    }
-    input[type="file"] {
-      display: block;
-      width: 100%;
-      margin: 10px 0 16px;
-      font-size: 14px;
-    }
-    #preview {
-      display: none;
-      width: 100%;
-      max-height: 350px;
-      object-fit: contain;
-      border-radius: 12px;
-      margin: 12px 0;
-      background: #f3f4f6;
-    }
-    button {
-      width: 100%;
-      padding: 14px;
-      border: 0;
-      border-radius: 10px;
-      background: #15803d;
-      color: white;
-      font-size: 17px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    button:disabled { opacity: .6; }
-    #status { font-size: 14px; color: #52645a; }
-    #result {
-      overflow-wrap: anywhere;
-      font-size: 15px;
-    }
-    #result h3 {
-      color: #166534;
-      font-size: 17px;
-      margin: 20px 0 8px;
-    }
-    #result p { margin: 8px 0; }
-    #result ul { padding-left: 22px; }
-    .note { color: #64748b; font-size: 13px; }
-    [hidden] { display: none !important; }
- 
-.upload-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 28px 16px;
-  margin: 18px 0;
-  background: #ecfdf5;
-  border: 2px dashed #16a34a;
-  border-radius: 18px;
-  text-align: center;
-  cursor: pointer;
-  transition: 0.2s;
-}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#176b3a">
+<title>TaniCam AI - Asisten Petani</title>
 
-.upload-box:active {
-  background: #dcfce7;
-  transform: scale(0.98);
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ font-family:Arial,sans-serif;
+ background:#effaf1;
+ color:#173b2a;
+ line-height:1.6;
 }
-
-.upload-icon {
-  font-size: 42px;
+header{
+ background:linear-gradient(135deg,#145c35,#239653);
+ color:white;
+ padding:25px 18px 35px;
+ text-align:center;
+ border-radius:0 0 28px 28px;
 }
-
-.upload-box strong {
-  font-size: 17px;
-  color: #166534;
+header img{
+ width:190px;
+ max-width:65%;
+ display:block;
+ margin:auto;
 }
-
-.upload-box span {
-  font-size: 14px;
-  color: #52645a;
+header h1{margin:8px 0;font-size:30px}
+header p{margin:0;font-size:15px}
+main{max-width:650px;margin:22px auto;padding:0 15px}
+.card{
+ background:white;
+ padding:23px;
+ border-radius:25px;
+ box-shadow:0 8px 28px #174d2512;
 }
-
-.upload-box .upload-button {
-  background: #15803d;
-  color: white;
-  padding: 12px 22px;
-  border-radius: 10px;
-  font-weight: bold;
-  font-size: 15px;
-  margin-top: 5px;
+h2{color:#176b3a;margin-top:0}
+.upload-box{
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ text-align:center;
+ gap:10px;
+ padding:25px 15px;
+ margin:18px 0;
+ background:#e9f9ee;
+ border:2px dashed #239653;
+ border-radius:20px;
+ cursor:pointer;
 }
-
-.file-input {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  opacity: 0;
-  overflow: hidden;
-    }
-  </style>
+.upload-icon{font-size:48px}
+.upload-box strong{font-size:19px;color:#176b3a}
+.upload-box span{color:#52645a}
+.upload-button{
+ background:#168044;
+ color:white;
+ padding:13px 22px;
+ border-radius:12px;
+ font-weight:bold;
+ margin-top:5px;
+}
+.file-input{
+ position:absolute;
+ width:1px;
+ height:1px;
+ opacity:0;
+}
+#preview{
+ display:none;
+ width:100%;
+ max-height:300px;
+ object-fit:contain;
+ border-radius:15px;
+ margin:12px 0;
+}
+button{
+ width:100%;
+ padding:16px;
+ border:0;
+ border-radius:13px;
+ background:#168044;
+ color:white;
+ font-size:18px;
+ font-weight:bold;
+ cursor:pointer;
+}
+button:disabled{opacity:.55}
+#status{font-size:14px;color:#52645a}
+#result{
+ white-space:pre-wrap;
+ overflow-wrap:anywhere;
+ font-size:15px;
+ margin-top:15px;
+}
+.features{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:12px;
+ margin-top:18px;
+}
+.feature{
+ background:#e9f7ed;
+ padding:14px;
+ border-radius:15px;
+ text-align:center;
+}
+.feature b{display:block;color:#176b3a}
+footer{text-align:center;color:#64748b;font-size:13px;padding:25px}
+</style>
 </head>
+
 <body>
-  <header>
-    <img 
-      src="file_000000001b988211a2bb6efa2009a905.png" alt="Petani TaniCam" style="width:150px; max-width:45%; height:auto; margin-bottom:10px;">
-    <h1>TaniCam AI</h1>
-    <p>Asisten cerdas untuk membantu memeriksa kondisi tanaman.</p>
-  </header>
 
-  <main>
-    <section class="card">
-      <h2>Periksa Tanaman</h2>
-      <p>Pilih foto daun atau tanaman yang ingin diperiksa.</p>
+<header>
+<img
+src="https://raw.githubusercontent.com/kenziealden312-max/tani-cam-ai/main/file_000000001b988211a2bb6efa2009a905.png"
+alt="Petani TaniCam">
+<h1>TaniCam AI</h1>
+<p>Asisten cerdas untuk membantu memeriksa kondisi tanaman.</p>
+</header>
 
-      
+<main>
+<section class="card">
+<h2>🌱 Periksa Tanaman</h2>
+<p>Ambil foto daun atau tanaman untuk mengetahui kemungkinan masalahnya.</p>
+
 <label class="upload-box" for="image">
-  <span class="upload-icon">📷</span>
-  <strong>Ambil Foto atau Upload Gambar</strong>
-  <span>Tekan di sini untuk memilih foto tanaman</span>
-  <span class="upload-button">PILIH FOTO TANAMAN</span>
+<span class="upload-icon">📸</span>
+<strong>Ambil Foto atau Upload Gambar</strong>
+<span>Ketuk kotak ini untuk memilih foto tanaman</span>
+<span class="upload-button">PILIH FOTO TANAMAN</span>
 </label>
 
 <input
-  id="image"
-  type="file"
-  class="file-input"
-  accept="image/jpeg,image/png,image/webp"
-  capture="environment"
->
+id="image"
+class="file-input"
+type="file"
+accept="image/jpeg,image/png,image/webp"
+capture="environment">
 
+<img id="preview" alt="Pratinjau foto tanaman">
 
-      <img id="preview" alt="Pratinjau foto tanaman">
+<button id="analyze" type="button" disabled>
+🔍 Analisis Tanaman
+</button>
 
-      <button id="analyze" type="button">Analisis Tanaman</button>
-      <p id="status" role="status" aria-live="polite"></p>
-      <p class="note">
-        Gunakan foto yang jelas. Hasil AI adalah dugaan awal,
-        bukan diagnosis pasti.
-      </p>
-    </section>
+<p id="status" role="status"></p>
+<div id="result"></div>
 
-    <section class="card" id="resultCard" hidden>
-      <h2>Hasil Analisis</h2>
-      <div id="result"></div>
-    </section>
-  </main>
+<div class="features">
+<div class="feature">🌿<b>Kenali Tanaman</b><small>Identifikasi dari foto</small></div>
+<div class="feature">🔎<b>Deteksi Gejala</b><small>Periksa kondisi daun</small></div>
+<div class="feature">💡<b>Saran Perawatan</b><small>Langkah penanganan awal</small></div>
+<div class="feature">🌾<b>Edukasi Petani</b><small>Belajar merawat tanaman</small></div>
+</div>
+</section>
+</main>
 
-  <script>
-    const API_URL = "https://tani-cam-ai.onrender.com/analyze";
-    const imageInput = document.getElementById("image");
-    const preview = document.getElementById("preview");
-    const button = document.getElementById("analyze");
-    const status = document.getElementById("status");
-    const resultCard = document.getElementById("resultCard");
-    const result = document.getElementById("result");
+<footer>
+TaniCam AI · Teknologi untuk membantu petani Indonesia
+<br>Hasil AI merupakan dugaan awal, bukan diagnosis pasti.
+</footer>
 
-    imageInput.addEventListener("change", () => {
-      const file = imageInput.files[0];
-      preview.style.display = file ? "block" : "none";
-      if (file) {
-        preview.src = URL.createObjectURL(file);
-        status.textContent = "";
-      }
-    });
+<script>
+const input=document.getElementById("image");
+const preview=document.getElementById("preview");
+const button=document.getElementById("analyze");
+const status=document.getElementById("status");
+const result=document.getElementById("result");
 
-    function showAnalysis(text) {
-      const safe = text.replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;");
+let selectedFile=null;
 
-      const lines = safe.split(/\r?\n/);
-      result.innerHTML = "";
+input.addEventListener("change",()=>{
+ const file=input.files[0];
+ if(!file)return;
 
-      lines.forEach(line => {
-        let value = line.trim();
-        if (!value) return;
+ selectedFile=file;
+ preview.src=URL.createObjectURL(file);
+ preview.style.display="block";
+ button.disabled=false;
+ result.textContent="";
+ status.textContent="Foto berhasil dipilih. Tekan Analisis Tanaman.";
+});
 
-        value = value
-          .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-          .replace(/\*(.*?)\*/g, "<em>$1</em>");
+button.addEventListener("click",async()=>{
+ if(!selectedFile)return;
 
-        const heading = value.match(
-          /^\**\s*\d+\.\s*(.*?)\**$/
-        );
+ button.disabled=true;
+ status.textContent="Sedang memeriksa tanaman... Mohon tunggu.";
+ result.textContent="";
 
-        if (heading && !value.includes(":**")) {
-          const h = document.createElement("h3");
-          h.innerHTML = value.replace(
-            /^\**\s*\d+\.\s*/,
-            ""
-          ).replace(/\**$/, "");
-          result.appendChild(h);
-        } else {
-          const p = document.createElement("p");
-          p.innerHTML = value
-            .replace(/^\*\s*/, "• ")
-            .replace(/^\-\s*/, "• ");
-          result.appendChild(p);
-        }
-      });
-    }
+ const formData=new FormData();
+ formData.append("image",selectedFile);
 
-    button.addEventListener("click", async () => {
-      const file = imageInput.files[0];
+ try{
+  const response=await fetch(
+   "https://tani-cam-ai.onrender.com/analyze",
+   {method:"POST",body:formData}
+  );
 
-      if (!file) {
-        status.textContent = "Pilih foto tanaman terlebih dahulu.";
-        return;
-      }
+  const data=await response.json();
 
-      if (file.size > 10 * 1024 * 1024) {
-        status.textContent = "Ukuran foto maksimal 10 MB.";
-        return;
-      }
+  if(!response.ok){
+   throw new Error(data.detail||"Analisis gagal.");
+  }
 
-      button.disabled = true;
-      button.textContent = "Sedang Menganalisis...";
-      status.textContent = "Foto sedang diperiksa oleh AI...";
-      resultCard.hidden = true;
+  result.textContent=data.analysis;
+  status.textContent="Analisis selesai.";
+ }catch(error){
+  status.textContent="Terjadi kendala: "+error.message;
+ }finally{
+  button.disabled=false;
+ }
+});
+</script>
 
-      try {
-        const formData = new FormData();
-        formData.append("image", file);
-
-        const response = await fetch(API_URL, {
-          method: "POST",
-          body: formData
-        });
-
-        const data = await response.json();
-
-        if (!response.ok) {
-          throw new Error(
-            data.detail || "Analisis gagal. Silakan coba lagi."
-          );
-        }
-
-        if (!data.analysis) {
-          throw new Error("AI belum memberikan hasil.");
-        }
-
-        showAnalysis(data.analysis);
-        resultCard.hidden = false;
-        status.textContent = "Analisis selesai.";
-      } catch (error) {
-        status.textContent =
-          error.message || "Koneksi gagal. Coba lagi.";
-      } finally {
-        button.disabled = false;
-        button.textContent = "Analisis Tanaman";
-      }
-    });
-  </script>
 </body>
 </html>
