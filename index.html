@@ -82,6 +82,59 @@
     #result ul { padding-left: 22px; }
     .note { color: #64748b; font-size: 13px; }
     [hidden] { display: none !important; }
+ 
+.upload-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 28px 16px;
+  margin: 18px 0;
+  background: #ecfdf5;
+  border: 2px dashed #16a34a;
+  border-radius: 18px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.upload-box:active {
+  background: #dcfce7;
+  transform: scale(0.98);
+}
+
+.upload-icon {
+  font-size: 42px;
+}
+
+.upload-box strong {
+  font-size: 17px;
+  color: #166534;
+}
+
+.upload-box span {
+  font-size: 14px;
+  color: #52645a;
+}
+
+.upload-box .upload-button {
+  background: #15803d;
+  color: white;
+  padding: 12px 22px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 15px;
+  margin-top: 5px;
+}
+
+.file-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  overflow: hidden;
+    }
   </style>
 </head>
 <body>
@@ -95,13 +148,22 @@
       <h2>Periksa Tanaman</h2>
       <p>Pilih foto daun atau tanaman yang ingin diperiksa.</p>
 
-      <label for="image">Foto tanaman</label>
-      <input
-        id="image"
-        type="file"
-        accept="image/jpeg,image/png,image/webp"
-        capture="environment"
-      >
+      
+<label class="upload-box" for="image">
+  <span class="upload-icon">📷</span>
+  <strong>Ambil Foto atau Upload Gambar</strong>
+  <span>Tekan di sini untuk memilih foto tanaman</span>
+  <span class="upload-button">PILIH FOTO TANAMAN</span>
+</label>
+
+<input
+  id="image"
+  type="file"
+  class="file-input"
+  accept="image/jpeg,image/png,image/webp"
+  capture="environment"
+>
+
 
       <img id="preview" alt="Pratinjau foto tanaman">
 
