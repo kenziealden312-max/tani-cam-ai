@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -9,211 +10,314 @@
 <style>
 *{box-sizing:border-box}
 body{
- margin:0;
- font-family:Arial,sans-serif;
- background:#effaf1;
- color:#173b2a;
- line-height:1.6;
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#effaf1;
+  color:#173b2a;
+  line-height:1.6;
 }
 header{
- background:linear-gradient(135deg,#145c35,#239653);
- color:white;
- padding:25px 18px 35px;
- text-align:center;
- border-radius:0 0 28px 28px;
+  background:linear-gradient(135deg,#145c32,#239653);
+  color:white;
+  padding:28px 18px;
+  text-align:center;
+  border-radius:0 0 28px 28px;
 }
 header img{
- width:190px;
- max-width:65%;
- display:block;
- margin:auto;
+  width:150px;
+  max-width:55%;
+  display:block;
+  margin:auto auto 10px;
 }
-header h1{margin:8px 0;font-size:30px}
-header p{margin:0;font-size:15px}
-main{max-width:650px;margin:22px auto;padding:0 15px}
+header h1{margin:5px 0;font-size:29px}
+header p{margin:5px 0}
+main{
+  max-width:650px;
+  margin:25px auto;
+  padding:0 15px;
+}
 .card{
- background:white;
- padding:23px;
- border-radius:25px;
- box-shadow:0 8px 28px #174d2512;
+  background:white;
+  padding:25px 20px;
+  border-radius:25px;
+  box-shadow:0 8px 30px #174b2610;
 }
 h2{color:#176b3a;margin-top:0}
 .upload-box{
- display:flex;
- flex-direction:column;
- align-items:center;
- text-align:center;
- gap:10px;
- padding:25px 15px;
- margin:18px 0;
- background:#e9f9ee;
- border:2px dashed #239653;
- border-radius:20px;
- cursor:pointer;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:24px 15px;
+  margin:16px 0;
+  background:#eaf9ef;
+  border:2px dashed #26965b;
+  border-radius:18px;
+  text-align:center;
+  cursor:pointer;
 }
-.upload-icon{font-size:48px}
-.upload-box strong{font-size:19px;color:#176b3a}
+.upload-icon{font-size:42px}
+.upload-box strong{font-size:18px;color:#176b3a}
 .upload-box span{color:#52645a}
 .upload-button{
- background:#168044;
- color:white;
- padding:13px 22px;
- border-radius:12px;
- font-weight:bold;
- margin-top:5px;
+  background:#168044;
+  color:white!important;
+  padding:11px 20px;
+  border-radius:10px;
+  font-weight:bold;
+  margin-top:5px;
 }
 .file-input{
- position:absolute;
- width:1px;
- height:1px;
- opacity:0;
+  position:absolute;
+  width:1px;
+  height:1px;
+  opacity:0;
+  overflow:hidden;
 }
 #preview{
- display:none;
- width:100%;
- max-height:300px;
- object-fit:contain;
- border-radius:15px;
- margin:12px 0;
+  display:none;
+  width:100%;
+  max-height:350px;
+  object-fit:contain;
+  margin:20px 0;
+  border-radius:15px;
+  background:#f2f5f2;
 }
 button{
- width:100%;
- padding:16px;
- border:0;
- border-radius:13px;
- background:#168044;
- color:white;
- font-size:18px;
- font-weight:bold;
- cursor:pointer;
+  width:100%;
+  padding:16px;
+  border:0;
+  border-radius:12px;
+  background:#168044;
+  color:white;
+  font-size:17px;
+  font-weight:bold;
+  cursor:pointer;
 }
-button:disabled{opacity:.55}
-#status{font-size:14px;color:#52645a}
+button:disabled{opacity:.5}
+#status{
+  font-size:14px;
+  margin-top:15px;
+  color:#52645a;
+}
 #result{
- white-space:pre-wrap;
- overflow-wrap:anywhere;
- font-size:15px;
- margin-top:15px;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+  font-size:15px;
+  margin-top:15px;
+}
+.note{
+  color:#64748b;
+  font-size:13px;
+  margin-top:18px;
 }
 .features{
- display:grid;
- grid-template-columns:1fr 1fr;
- gap:12px;
- margin-top:18px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:20px;
 }
 .feature{
- background:#e9f7ed;
- padding:14px;
- border-radius:15px;
- text-align:center;
+  background:#eaf7ed;
+  padding:15px 10px;
+  border-radius:15px;
+  text-align:center;
 }
-.feature b{display:block;color:#176b3a}
-footer{text-align:center;color:#64748b;font-size:13px;padding:25px}
+footer{
+  text-align:center;
+  color:#64748b;
+  padding:20px;
+  font-size:13px;
+}
 </style>
 </head>
 
 <body>
 
 <header>
-<img
-src="https://raw.githubusercontent.com/kenziealden312-max/tani-cam-ai/main/file_000000001b988211a2bb6efa2009a905.png"
-alt="Petani TaniCam">
-<h1>TaniCam AI</h1>
-<p>Asisten cerdas untuk membantu memeriksa kondisi tanaman.</p>
+  <img
+    src="https://raw.githubusercontent.com/kenziealden312-max/tani-cam-ai/main/file_000000001b988211a2bb6efa2009a905.png"
+    alt="Petani TaniCam"
+  >
+  <h1>TaniCam AI</h1>
+  <p>Asisten cerdas untuk membantu memeriksa kondisi tanaman.</p>
 </header>
 
 <main>
 <section class="card">
-<h2>🌱 Periksa Tanaman</h2>
-<p>Ambil foto daun atau tanaman untuk mengetahui kemungkinan masalahnya.</p>
 
-<label class="upload-box" for="image">
-<span class="upload-icon">📸</span>
-<strong>Ambil Foto atau Upload Gambar</strong>
-<span>Ketuk kotak ini untuk memilih foto tanaman</span>
-<span class="upload-button">PILIH FOTO TANAMAN</span>
-</label>
+  <h2>🌱 Periksa Tanaman</h2>
+  <p>Ambil foto daun atau tanaman untuk mengetahui kemungkinan masalahnya.</p>
 
-<input
-id="image"
-class="file-input"
-type="file"
-accept="image/*">
+  <!-- PILIH DARI GALERI -->
+  <label class="upload-box" for="image">
+    <span class="upload-icon">🖼️</span>
+    <strong>PILIH FOTO DARI GALERI</strong>
+    <span>Pilih foto tanaman yang sudah tersimpan di HP</span>
+    <span class="upload-button">BUKA GALERI</span>
+  </label>
 
+  <input
+    id="image"
+    class="file-input"
+    type="file"
+    accept="image/jpeg,image/png,image/webp"
+  >
 
-<img id="preview" alt="Pratinjau foto tanaman">
+  <!-- AMBIL FOTO DARI KAMERA -->
+  <label class="upload-box" for="cameraInput">
+    <span class="upload-icon">📷</span>
+    <strong>AMBIL FOTO DENGAN KAMERA</strong>
+    <span>Foto tanaman secara langsung</span>
+    <span class="upload-button">BUKA KAMERA</span>
+  </label>
 
-<button id="analyze" type="button" disabled>
-🔍 Analisis Tanaman
-</button>
+  <input
+    id="cameraInput"
+    class="file-input"
+    type="file"
+    accept="image/jpeg,image/png,image/webp"
+    capture="environment"
+  >
 
-<p id="status" role="status"></p>
-<div id="result"></div>
+  <!-- PREVIEW FOTO -->
+  <img id="preview" alt="Pratinjau foto tanaman">
 
-<div class="features">
-<div class="feature">🌿<b>Kenali Tanaman</b><small>Identifikasi dari foto</small></div>
-<div class="feature">🔎<b>Deteksi Gejala</b><small>Periksa kondisi daun</small></div>
-<div class="feature">💡<b>Saran Perawatan</b><small>Langkah penanganan awal</small></div>
-<div class="feature">🌾<b>Edukasi Petani</b><small>Belajar merawat tanaman</small></div>
-</div>
+  <button id="analyze" type="button" disabled>
+    🔎 Analisis Tanaman
+  </button>
+
+  <p id="status" role="status"></p>
+  <div id="result"></div>
+
+  <p class="note">
+    Gunakan foto yang jelas. Hasil AI merupakan dugaan awal,
+    bukan diagnosis pasti. Format foto JPG, PNG, atau WEBP,
+    maksimal 10 MB.
+  </p>
+
+  <div class="features">
+    <div class="feature">
+      🌿<br><b>Kenali Tanaman</b>
+    </div>
+    <div class="feature">
+      🔎<br><b>Deteksi Gejala</b>
+    </div>
+    <div class="feature">
+      💡<br><b>Saran Perawatan</b>
+    </div>
+    <div class="feature">
+      🌾<br><b>Edukasi Petani</b>
+    </div>
+  </div>
+
 </section>
 </main>
 
 <footer>
-TaniCam AI · Teknologi untuk membantu petani Indonesia
-<br>Hasil AI merupakan dugaan awal, bukan diagnosis pasti.
+  TaniCam AI · Teknologi untuk membantu petani Indonesia.
+  <br>
+  Hasil AI merupakan dugaan awal dan perlu pemeriksaan lebih lanjut.
 </footer>
 
 <script>
-const input=document.getElementById("image");
-const preview=document.getElementById("preview");
-const button=document.getElementById("analyze");
-const status=document.getElementById("status");
-const result=document.getElementById("result");
+const galleryInput = document.getElementById("image");
+const cameraInput = document.getElementById("cameraInput");
+const preview = document.getElementById("preview");
+const button = document.getElementById("analyze");
+const statusText = document.getElementById("status");
+const result = document.getElementById("result");
 
-let selectedFile=null;
+let selectedFile = null;
+let previewUrl = null;
 
-input.addEventListener("change",()=>{
- const file=input.files[0];
- if(!file)return;
+// Satu fungsi untuk kamera dan galeri
+function selectPhoto(file) {
+  if (!file) return;
 
- selectedFile=file;
- preview.src=URL.createObjectURL(file);
- preview.style.display="block";
- button.disabled=false;
- result.textContent="";
- status.textContent="Foto berhasil dipilih. Tekan Analisis Tanaman.";
-});
+  const allowedTypes = [
+    "image/jpeg",
+    "image/png",
+    "image/webp"
+  ];
 
-button.addEventListener("click",async()=>{
- if(!selectedFile)return;
-
- button.disabled=true;
- status.textContent="Sedang memeriksa tanaman... Mohon tunggu.";
- result.textContent="";
-
- const formData=new FormData();
- formData.append("image",selectedFile);
-
- try{
-  const response=await fetch(
-   "https://tani-cam-ai.onrender.com/analyze",
-   {method:"POST",body:formData}
-  );
-
-  const data=await response.json();
-
-  if(!response.ok){
-   throw new Error(data.detail||"Analisis gagal.");
+  if (!allowedTypes.includes(file.type)) {
+    statusText.textContent =
+      "Gunakan foto JPG, PNG, atau WEBP.";
+    return;
   }
 
-  result.textContent=data.analysis;
-  status.textContent="Analisis selesai.";
- }catch(error){
-  status.textContent="Terjadi kendala: "+error.message;
- }finally{
-  button.disabled=false;
- }
+  if (file.size > 10 * 1024 * 1024) {
+    statusText.textContent =
+      "Ukuran foto maksimal 10 MB.";
+    return;
+  }
+
+  selectedFile = file;
+
+  if (previewUrl) {
+    URL.revokeObjectURL(previewUrl);
+  }
+
+  previewUrl = URL.createObjectURL(file);
+  preview.src = previewUrl;
+  preview.style.display = "block";
+
+  button.disabled = false;
+  result.textContent = "";
+  statusText.textContent =
+    "Foto berhasil dipilih. Siap dianalisis.";
+}
+
+// Foto dari galeri
+galleryInput.addEventListener("change", function() {
+  selectPhoto(this.files[0]);
+});
+
+// Foto dari kamera
+cameraInput.addEventListener("change", function() {
+  selectPhoto(this.files[0]);
+});
+
+// Analisis menggunakan server Render
+button.addEventListener("click", async function() {
+  if (!selectedFile) return;
+
+  button.disabled = true;
+  statusText.textContent = "Sedang menganalisis tanaman...";
+  result.textContent = "";
+
+  const formData = new FormData();
+  formData.append("image", selectedFile);
+
+  try {
+    const response = await fetch(
+      "https://tani-cam-ai.onrender.com/analyze",
+      {
+        method: "POST",
+        body: formData
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(
+        data.detail || "Analisis gagal. Silakan coba lagi."
+      );
+    }
+
+    result.textContent = data.analysis;
+    statusText.textContent = "Analisis selesai.";
+
+  } catch (error) {
+    statusText.textContent =
+      "Terjadi kendala: " + error.message;
+
+  } finally {
+    button.disabled = false;
+  }
 });
 </script>
 
