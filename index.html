@@ -3,157 +3,293 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#176b3a">
-<title>TaniCam AI - Asisten Petani</title>
+<title>TaniCam AI</title>
 
 <style>
 *{box-sizing:border-box}
+
 body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#eff7ef;
-  color:#173b25;
-  line-height:1.5
+margin:0;
+font-family:Arial,sans-serif;
+background:#eff7ef;
+color:#173b25;
+line-height:1.5
 }
+
 header{
-  background:linear-gradient(135deg,#176b3a,#2c9858);
-  color:white;
-  padding:22px 16px;
-  text-align:center
+background:linear-gradient(135deg,#14532d,#219653);
+color:white;
+text-align:center;
+padding:28px 15px 35px;
+border-radius:0 0 30px 30px
 }
+
 header img{
-  width:110px;
-  height:110px;
-  object-fit:contain
+width:115px;
+height:115px;
+object-fit:contain
 }
-header h1{margin:5px 0;font-size:26px}
-header p{margin:0;font-size:14px}
+
+header h1{
+margin:5px 0;
+font-size:30px
+}
+
+header p{margin:0}
+
 main{
-  max-width:700px;
-  margin:auto;
-  padding:15px
+max-width:720px;
+margin:auto;
+padding:16px
 }
-.card{
-  background:white;
-  padding:18px;
-  border-radius:18px;
-  margin-bottom:16px;
-  box-shadow:0 3px 12px #0000000c
-}
-h2{font-size:20px;margin:0 0 12px}
-h3{font-size:16px}
-input,textarea,select,button{
-  width:100%;
-  padding:12px;
-  margin:6px 0;
-  border-radius:10px;
-  border:1px solid #cbd9cc;
-  font-size:15px
-}
-button{
-  background:#176b3a;
-  color:white;
-  border:0;
-  font-weight:bold;
-  cursor:pointer
-}
-button.secondary{background:#e5f1e7;color:#176b3a}
-button.danger{background:#b83232}
-button:disabled{opacity:.5}
+
 .tabs{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-  margin-bottom:15px
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+margin-bottom:18px
 }
-.tabs button{margin:0}
-.tabs button.active{background:#104b29}
+
+button{
+border:0;
+border-radius:13px;
+padding:14px;
+font-size:15px;
+font-weight:bold;
+cursor:pointer;
+background:#176b3a;
+color:white
+}
+
+button:active{
+transform:scale(.98)
+}
+
+.tabs button{
+background:#dceee0;
+color:#176b3a
+}
+
+.tabs button.active{
+background:#14532d;
+color:white
+}
+
+.card{
+background:white;
+border-radius:22px;
+padding:20px;
+margin-bottom:18px;
+box-shadow:0 5px 18px #173b2510
+}
+
+h2{
+font-size:21px;
+margin:0 0 12px
+}
+
+h3{font-size:17px}
+
+.small{
+font-size:13px;
+color:#718073
+}
+
+input,textarea,select{
+width:100%;
+padding:14px;
+margin:7px 0;
+border:1px solid #d4e0d6;
+border-radius:12px;
+font-size:15px;
+background:white;
+color:#173b25
+}
+
+textarea{
+min-height:85px;
+resize:vertical
+}
+
 .hidden{display:none!important}
+
+/* UPLOAD DESIGN */
+
+.upload-card{
+border:2px dashed #8cc5a0;
+border-radius:20px;
+padding:22px 15px;
+margin:15px 0;
+text-align:center;
+background:linear-gradient(145deg,#f3fbf5,#e5f5e9);
+transition:.2s
+}
+
+.upload-card:active{
+background:#d8efdf
+}
+
+.upload-icon{
+font-size:48px;
+margin-bottom:8px
+}
+
+.upload-card h3{
+margin:4px 0 8px;
+color:#176b3a
+}
+
+.upload-card p{
+font-size:14px;
+color:#637568;
+margin:5px 0 15px
+}
+
+.upload-card button{
+width:100%;
+max-width:280px;
+padding:15px;
+background:#176b3a
+}
+
+.upload-card.camera{
+background:linear-gradient(145deg,#e9f5ed,#d9efe1);
+border-color:#55a875
+}
+
+.upload-card.camera button{
+background:#14532d
+}
+
 .preview{
-  width:100%;
-  max-height:320px;
-  object-fit:contain;
-  border-radius:12px;
-  background:#f2f5f2;
-  margin-top:10px
+width:100%;
+max-height:350px;
+object-fit:contain;
+border-radius:16px;
+margin-top:15px;
+background:#f4f7f4
 }
+
+.primary{
+width:100%;
+margin-top:12px;
+padding:16px;
+font-size:16px
+}
+
 .result{
-  background:#f0f7f0;
-  padding:14px;
-  border-radius:12px;
-  white-space:pre-wrap;
-  overflow-wrap:anywhere
+background:#f0f7f0;
+padding:15px;
+border-radius:14px;
+white-space:pre-wrap;
+overflow-wrap:anywhere;
+margin-top:15px
 }
+
 .item{
-  border:1px solid #dce8dd;
-  border-radius:12px;
-  padding:12px;
-  margin-top:10px
+border:1px solid #dce8dd;
+border-radius:14px;
+padding:14px;
+margin-top:12px
 }
-.item button{margin-top:5px}
-.small{font-size:13px;color:#637568}
-footer{text-align:center;padding:20px;font-size:12px;color:#718073}
+
+.item strong{
+font-size:17px
+}
+
+.item p{
+white-space:pre-wrap;
+overflow-wrap:anywhere
+}
+
+.item button{
+width:100%;
+margin-top:8px
+}
+
+.danger{background:#b83232}
+.secondary{background:#e5f1e7;color:#176b3a}
+
+footer{
+text-align:center;
+padding:25px;
+font-size:12px;
+color:#718073
+}
 </style>
 </head>
 
 <body>
 
 <header>
-  <img
-    src="https://raw.githubusercontent.com/kenziealden312-max/tani-cam-ai/main/file_000000001b988211a2bb6efa2009a905.png"
-    alt="TaniCam AI"
-  >
-  <h1>TaniCam AI</h1>
-  <p>Asisten Petani Indonesia</p>
+<img src="https://raw.githubusercontent.com/kenziealden312-max/tani-cam-ai/main/file_000000001b988211a2bb6efa2009a905.png" alt="TaniCam AI">
+<h1>TaniCam AI</h1>
+<p>Asisten Petani Indonesia</p>
 </header>
 
 <main>
 
 <div class="tabs">
-  <button id="scanTab" class="active" onclick="showPage('scan')">
-    Scan Tanaman
-  </button>
-  <button id="farmTab" onclick="showPage('farm')">
-    Farm Management
-  </button>
+<button id="scanTab" class="active" onclick="showPage('scan')">Scan Tanaman</button>
+<button id="farmTab" onclick="showPage('farm')">Farm Management</button>
 </div>
 
-<!-- SCAN TANAMAN -->
+<!-- SCAN -->
 
 <section id="scanPage">
 
 <div class="card">
-<h2>Identifikasi Tanaman</h2>
 
-<p class="small">
-Ambil foto atau pilih gambar tanaman untuk dianalisis AI.
-</p>
+<h2>Periksa Tanaman</h2>
 
-<label for="cameraInput">Ambil foto menggunakan kamera</label>
-<input
-  id="cameraInput"
-  type="file"
-  accept="image/*"
-  capture="environment"
->
+<p>Ambil foto daun atau tanaman untuk mengetahui kemungkinan masalahnya.</p>
 
-<label for="image">Pilih gambar dari galeri</label>
-<input
-  id="image"
-  type="file"
-  accept="image/*"
->
+<div class="upload-card">
 
-<img id="preview" class="preview hidden" alt="Preview tanaman">
+<div class="upload-icon">🖼️</div>
 
-<button id="analyzeBtn" onclick="analyzePlant()">
-  Analisis Tanaman
+<h3>PILIH FOTO DARI GALERI</h3>
+
+<p>Pilih foto tanaman yang sudah tersimpan di HP</p>
+
+<button onclick="document.getElementById('galleryInput').click()">
+BUKA GALERI
+</button>
+
+<input id="galleryInput" type="file" accept="image/*" hidden>
+
+</div>
+
+<div class="upload-card camera">
+
+<div class="upload-icon">📷</div>
+
+<h3>AMBIL FOTO DENGAN KAMERA</h3>
+
+<p>Foto tanaman secara langsung</p>
+
+<button onclick="document.getElementById('cameraInput').click()">
+BUKA KAMERA
+</button>
+
+<input id="cameraInput" type="file" accept="image/*" capture="environment" hidden>
+
+</div>
+
+<img id="preview" class="preview hidden" alt="Foto tanaman">
+
+<p id="fileName" class="small"></p>
+
+<button id="analyzeBtn" class="primary" onclick="analyzePlant()">
+🔍 ANALISIS TANAMAN
 </button>
 
 <p id="status" class="small"></p>
 
 <div id="result" class="result hidden"></div>
+
 </div>
 
 </section>
@@ -163,7 +299,8 @@ Ambil foto atau pilih gambar tanaman untuk dianalisis AI.
 <section id="farmPage" class="hidden">
 
 <div class="card">
-<h2>Profil Petani</h2>
+
+<h2>👨‍🌾 Profil Petani</h2>
 
 <input id="farmerName" placeholder="Nama petani">
 
@@ -171,28 +308,31 @@ Ambil foto atau pilih gambar tanaman untuk dianalisis AI.
 
 <input id="farmerPhone" placeholder="Nomor telepon (opsional)">
 
-<button onclick="saveProfile()">Simpan Profil</button>
+<button class="primary" onclick="saveProfile()">Simpan Profil</button>
+
 </div>
 
 <div class="card">
-<h2>Data Lahan</h2>
+
+<h2>🌱 Data Lahan</h2>
 
 <input id="landName" placeholder="Nama lahan">
 
-<input id="landArea" type="number" min="0" step="any"
-placeholder="Luas lahan (m²)">
+<input id="landArea" type="number" min="0" step="any" placeholder="Luas lahan (m²)">
 
 <input id="landLocation" placeholder="Lokasi lahan">
 
 <textarea id="landNotes" placeholder="Catatan lahan"></textarea>
 
-<button onclick="addLand()">Tambah Lahan</button>
+<button class="primary" onclick="addLand()">Tambah Lahan</button>
 
 <div id="landList"></div>
+
 </div>
 
 <div class="card">
-<h2>Data Tanaman</h2>
+
+<h2>🌿 Data Tanaman</h2>
 
 <input id="plantName" placeholder="Nama tanaman">
 
@@ -202,458 +342,493 @@ placeholder="Luas lahan (m²)">
 
 <input id="plantDate" type="date">
 
-<input id="plantCount" type="number" min="0"
-placeholder="Jumlah tanaman">
+<input id="plantCount" type="number" min="0" placeholder="Jumlah tanaman">
 
-<textarea id="plantNotes"
-placeholder="Catatan tanaman"></textarea>
+<textarea id="plantNotes" placeholder="Catatan tanaman"></textarea>
 
-<button onclick="addPlant()">Tambah Tanaman</button>
+<button class="primary" onclick="addPlant()">Tambah Tanaman</button>
 
 <div id="plantList"></div>
+
 </div>
 
 <div class="card">
-<h2>Data Tersimpan</h2>
+
+<h2>💾 Data Tersimpan</h2>
 
 <p class="small">
-Data Farm Management tersimpan di browser perangkat ini.
+Data tersimpan di browser perangkat ini.
 Data tidak otomatis tersinkron ke perangkat lain.
 </p>
 
-<button class="secondary" onclick="exportData()">
-Ekspor Data JSON
-</button>
+<button class="secondary primary" onclick="exportData()">Ekspor Data JSON</button>
 
-<button class="danger" onclick="clearFarmData()">
-Hapus Semua Data Farm
-</button>
+<button class="danger primary" onclick="clearFarmData()">Hapus Semua Data Farm</button>
+
 </div>
 
 </section>
 
 </main>
 
-<footer>
-TaniCam AI · Asisten Petani
-</footer>
+<footer>TaniCam AI · Asisten Petani</footer>
 
 <script>
-const API_URL = "https://tani-cam-ai.onrender.com/analyze";
 
-let selectedFile = null;
+const API_URL="https://tani-cam-ai.onrender.com/analyze";
 
-let farmData = {
-  profile: {
-    name:"",
-    location:"",
-    phone:""
-  },
-  lands:[],
-  plants:[]
+let selectedFile=null;
+
+let farmData={
+profile:{name:"",location:"",phone:""},
+lands:[],
+plants:[]
 };
 
+/* NAVIGATION */
+
+function showPage(page){
+
+document.getElementById("scanPage").classList.toggle("hidden",page!=="scan");
+
+document.getElementById("farmPage").classList.toggle("hidden",page!=="farm");
+
+document.getElementById("scanTab").classList.toggle("active",page==="scan");
+
+document.getElementById("farmTab").classList.toggle("active",page==="farm");
+
+}
+
+/* IMAGE */
+
+function selectPhoto(file){
+
+if(!file)return;
+
+if(!file.type.startsWith("image/")){
+alert("Pilih file gambar.");
+return;
+}
+
+selectedFile=file;
+
+const preview=document.getElementById("preview");
+
+preview.src=URL.createObjectURL(file);
+
+preview.classList.remove("hidden");
+
+document.getElementById("fileName").textContent=file.name;
+
+document.getElementById("result").classList.add("hidden");
+
+document.getElementById("status").textContent="Foto siap dianalisis.";
+
+}
+
+document.getElementById("galleryInput").addEventListener("change",function(){
+selectPhoto(this.files[0]);
+});
+
+document.getElementById("cameraInput").addEventListener("change",function(){
+selectPhoto(this.files[0]);
+});
+
+/* AI ANALYSIS */
+
+async function analyzePlant(){
+
+if(!selectedFile){
+alert("Ambil foto atau pilih gambar terlebih dahulu.");
+return;
+}
+
+const button=document.getElementById("analyzeBtn");
+
+const status=document.getElementById("status");
+
+const result=document.getElementById("result");
+
+button.disabled=true;
+
+status.textContent="Sedang menganalisis tanaman...";
+
+result.classList.add("hidden");
+
+try{
+
+const formData=new FormData();
+
+formData.append("image",selectedFile);
+
+const response=await fetch(API_URL,{
+method:"POST",
+body:formData
+});
+
+const data=await response.json();
+
+if(!response.ok){
+throw new Error(data.detail||"Analisis gagal.");
+}
+
+let answer="";
+
+if(typeof data==="string"){
+answer=data;
+}else{
+answer=data.analysis||data.result||data.message||JSON.stringify(data,null,2);
+}
+
+result.textContent=answer;
+
+result.classList.remove("hidden");
+
+status.textContent="Analisis selesai.";
+
+}catch(error){
+
+status.textContent="Analisis gagal.";
+
+result.textContent="Tidak dapat menghubungi AI.\n\n"+error.message+"\n\nPeriksa koneksi internet dan status server.";
+
+result.classList.remove("hidden");
+
+}finally{
+
+button.disabled=false;
+
+}
+
+}
+
+/* LOCAL STORAGE */
+
 function loadFarmData(){
-  try{
-    const saved = localStorage.getItem("tanicam_farm");
 
-    if(saved){
-      const parsed = JSON.parse(saved);
+try{
 
-      farmData = {
-        profile:parsed.profile || {
-          name:"",
-          location:"",
-          phone:""
-        },
-        lands:Array.isArray(parsed.lands) ? parsed.lands : [],
-        plants:Array.isArray(parsed.plants) ? parsed.plants : []
-      };
-    }
-  }catch(error){
-    console.error(error);
-  }
+const saved=localStorage.getItem("tanicam_farm");
 
-  renderFarm();
+if(saved){
+
+const parsed=JSON.parse(saved);
+
+farmData={
+profile:parsed.profile||{name:"",location:"",phone:""},
+lands:Array.isArray(parsed.lands)?parsed.lands:[],
+plants:Array.isArray(parsed.plants)?parsed.plants:[]
+};
+
+}
+
+}catch(error){
+
+console.error(error);
+
+}
+
+renderFarm();
+
 }
 
 function saveFarmData(){
-  try{
-    localStorage.setItem(
-      "tanicam_farm",
-      JSON.stringify(farmData)
-    );
 
-    renderFarm();
-  }catch(error){
-    alert("Data gagal disimpan. Penyimpanan browser mungkin penuh.");
-  }
+try{
+
+localStorage.setItem("tanicam_farm",JSON.stringify(farmData));
+
+renderFarm();
+
+}catch(error){
+
+alert("Data gagal disimpan. Penyimpanan browser mungkin penuh.");
+
 }
 
-function showPage(page){
-  document.getElementById("scanPage").classList.toggle(
-    "hidden",page !== "scan"
-  );
-
-  document.getElementById("farmPage").classList.toggle(
-    "hidden",page !== "farm"
-  );
-
-  document.getElementById("scanTab").classList.toggle(
-    "active",page === "scan"
-  );
-
-  document.getElementById("farmTab").classList.toggle(
-    "active",page === "farm"
-  );
 }
 
-/* FOTO */
-
-function selectPhoto(file){
-  if(!file)return;
-
-  if(!file.type.startsWith("image/")){
-    alert("Pilih file gambar.");
-    return;
-  }
-
-  selectedFile = file;
-
-  const preview = document.getElementById("preview");
-
-  preview.src = URL.createObjectURL(file);
-  preview.classList.remove("hidden");
-
-  document.getElementById("result").classList.add("hidden");
-
-  document.getElementById("status").textContent =
-    "Foto siap dianalisis.";
-}
-
-document.getElementById("image").addEventListener(
-  "change",
-  function(){
-    selectPhoto(this.files[0]);
-  }
-);
-
-document.getElementById("cameraInput").addEventListener(
-  "change",
-  function(){
-    selectPhoto(this.files[0]);
-  }
-);
-
-/* ANALISIS AI */
-
-async function analyzePlant(){
-  if(!selectedFile){
-    alert("Ambil foto atau pilih gambar terlebih dahulu.");
-    return;
-  }
-
-  const button = document.getElementById("analyzeBtn");
-  const status = document.getElementById("status");
-  const result = document.getElementById("result");
-
-  button.disabled = true;
-  status.textContent = "Sedang menganalisis tanaman...";
-  result.classList.add("hidden");
-
-  try{
-    const formData = new FormData();
-
-    formData.append("image",selectedFile);
-
-    const response = await fetch(API_URL,{
-      method:"POST",
-      body:formData
-    });
-
-    const data = await response.json();
-
-    if(!response.ok){
-      throw new Error(
-        data.detail || "Analisis gagal."
-      );
-    }
-
-    let answer = "";
-
-    if(typeof data === "string"){
-      answer = data;
-    }else{
-      answer =
-        data.analysis ||
-        data.result ||
-        data.message ||
-        JSON.stringify(data,null,2);
-    }
-
-    result.textContent = answer;
-    result.classList.remove("hidden");
-
-    status.textContent = "Analisis selesai.";
-
-  }catch(error){
-    status.textContent = "Analisis gagal.";
-
-    result.textContent =
-      "Tidak dapat menghubungi AI.\n\n" +
-      error.message +
-      "\n\nPeriksa koneksi internet dan status server.";
-
-    result.classList.remove("hidden");
-
-  }finally{
-    button.disabled = false;
-  }
-}
-
-/* PROFIL */
+/* PROFILE */
 
 function saveProfile(){
-  farmData.profile = {
-    name:document.getElementById("farmerName").value.trim(),
-    location:document.getElementById("farmerLocation").value.trim(),
-    phone:document.getElementById("farmerPhone").value.trim()
-  };
 
-  saveFarmData();
+farmData.profile={
+name:document.getElementById("farmerName").value.trim(),
+location:document.getElementById("farmerLocation").value.trim(),
+phone:document.getElementById("farmerPhone").value.trim()
+};
 
-  alert("Profil petani tersimpan.");
+saveFarmData();
+
+alert("Profil petani tersimpan.");
+
 }
 
-/* LAHAN */
+/* LAND */
 
 function addLand(){
-  const name = document.getElementById("landName").value.trim();
 
-  if(!name){
-    alert("Masukkan nama lahan.");
-    return;
-  }
+const name=document.getElementById("landName").value.trim();
 
-  farmData.lands.push({
-    id:Date.now().toString(),
-    name:name,
-    area:document.getElementById("landArea").value,
-    location:document.getElementById("landLocation").value.trim(),
-    notes:document.getElementById("landNotes").value.trim()
-  });
+if(!name){
+alert("Masukkan nama lahan.");
+return;
+}
 
-  document.getElementById("landName").value="";
-  document.getElementById("landArea").value="";
-  document.getElementById("landLocation").value="";
-  document.getElementById("landNotes").value="";
+farmData.lands.push({
 
-  saveFarmData();
+id:Date.now().toString(),
+
+name:name,
+
+area:document.getElementById("landArea").value,
+
+location:document.getElementById("landLocation").value.trim(),
+
+notes:document.getElementById("landNotes").value.trim()
+
+});
+
+document.getElementById("landName").value="";
+
+document.getElementById("landArea").value="";
+
+document.getElementById("landLocation").value="";
+
+document.getElementById("landNotes").value="";
+
+saveFarmData();
+
 }
 
 function deleteLand(id){
-  const used = farmData.plants.some(
-    plant => plant.landId === id
-  );
 
-  if(used){
-    alert("Lahan masih digunakan oleh data tanaman. Hapus data tanaman terlebih dahulu.");
-    return;
-  }
+const used=farmData.plants.some(plant=>plant.landId===id);
 
-  if(!confirm("Hapus data lahan ini?"))return;
+if(used){
 
-  farmData.lands = farmData.lands.filter(
-    land => land.id !== id
-  );
+alert("Lahan masih digunakan oleh data tanaman. Hapus data tanaman terlebih dahulu.");
 
-  saveFarmData();
+return;
+
 }
 
-/* TANAMAN */
+if(!confirm("Hapus data lahan ini?"))return;
+
+farmData.lands=farmData.lands.filter(land=>land.id!==id);
+
+saveFarmData();
+
+}
+
+/* PLANTS */
 
 function addPlant(){
-  const name = document.getElementById("plantName").value.trim();
-  const landId = document.getElementById("plantLand").value;
 
-  if(!name){
-    alert("Masukkan nama tanaman.");
-    return;
-  }
+const name=document.getElementById("plantName").value.trim();
 
-  if(!landId){
-    alert("Pilih lahan.");
-    return;
-  }
+const landId=document.getElementById("plantLand").value;
 
-  farmData.plants.push({
-    id:Date.now().toString(),
-    name:name,
-    landId:landId,
-    date:document.getElementById("plantDate").value,
-    count:document.getElementById("plantCount").value,
-    notes:document.getElementById("plantNotes").value.trim()
-  });
+if(!name){
+alert("Masukkan nama tanaman.");
+return;
+}
 
-  document.getElementById("plantName").value="";
-  document.getElementById("plantDate").value="";
-  document.getElementById("plantCount").value="";
-  document.getElementById("plantNotes").value="";
+if(!landId){
+alert("Pilih lahan.");
+return;
+}
 
-  saveFarmData();
+farmData.plants.push({
+
+id:Date.now().toString(),
+
+name:name,
+
+landId:landId,
+
+date:document.getElementById("plantDate").value,
+
+count:document.getElementById("plantCount").value,
+
+notes:document.getElementById("plantNotes").value.trim()
+
+});
+
+document.getElementById("plantName").value="";
+
+document.getElementById("plantDate").value="";
+
+document.getElementById("plantCount").value="";
+
+document.getElementById("plantNotes").value="";
+
+saveFarmData();
+
 }
 
 function deletePlant(id){
-  if(!confirm("Hapus data tanaman ini?"))return;
 
-  farmData.plants = farmData.plants.filter(
-    plant => plant.id !== id
-  );
+if(!confirm("Hapus data tanaman ini?"))return;
 
-  saveFarmData();
+farmData.plants=farmData.plants.filter(plant=>plant.id!==id);
+
+saveFarmData();
+
 }
 
-/* TAMPIL DATA */
+/* RENDER */
 
 function renderFarm(){
-  const profile = farmData.profile || {};
 
-  document.getElementById("farmerName").value =
-    profile.name || "";
+const profile=farmData.profile||{};
 
-  document.getElementById("farmerLocation").value =
-    profile.location || "";
+document.getElementById("farmerName").value=profile.name||"";
 
-  document.getElementById("farmerPhone").value =
-    profile.phone || "";
+document.getElementById("farmerLocation").value=profile.location||"";
 
-  const landList = document.getElementById("landList");
+document.getElementById("farmerPhone").value=profile.phone||"";
 
-  landList.innerHTML = "";
+const landList=document.getElementById("landList");
 
-  farmData.lands.forEach(land=>{
-    const item = document.createElement("div");
+landList.innerHTML="";
 
-    item.className = "item";
+farmData.lands.forEach(land=>{
 
-    const title = document.createElement("strong");
-    title.textContent = land.name;
+const item=document.createElement("div");
 
-    const details = document.createElement("p");
+item.className="item";
 
-    details.textContent =
-      "Luas: " + (land.area || "-") + " m²" +
-      "\nLokasi: " + (land.location || "-") +
-      "\nCatatan: " + (land.notes || "-");
+const title=document.createElement("strong");
 
-    const button = document.createElement("button");
-    button.className = "danger";
-    button.textContent = "Hapus Lahan";
-    button.onclick = ()=>deleteLand(land.id);
+title.textContent=land.name;
 
-    item.append(title,details,button);
+const details=document.createElement("p");
 
-    landList.appendChild(item);
-  });
+details.textContent="Luas: "+(land.area||"-")+" m²\nLokasi: "+(land.location||"-")+"\nCatatan: "+(land.notes||"-");
 
-  const select = document.getElementById("plantLand");
+const button=document.createElement("button");
 
-  const previous = select.value;
+button.className="danger";
 
-  select.innerHTML = "";
+button.textContent="Hapus Lahan";
 
-  const first = document.createElement("option");
-  first.value="";
-  first.textContent="Pilih lahan";
+button.onclick=()=>deleteLand(land.id);
 
-  select.appendChild(first);
+item.append(title,details,button);
 
-  farmData.lands.forEach(land=>{
-    const option = document.createElement("option");
+landList.appendChild(item);
 
-    option.value = land.id;
-    option.textContent = land.name;
+});
 
-    select.appendChild(option);
-  });
+const select=document.getElementById("plantLand");
 
-  if(farmData.lands.some(land=>land.id === previous)){
-    select.value = previous;
-  }
+const previous=select.value;
 
-  const plantList = document.getElementById("plantList");
+select.innerHTML="";
 
-  plantList.innerHTML = "";
+const first=document.createElement("option");
 
-  farmData.plants.forEach(plant=>{
-    const land = farmData.lands.find(
-      item=>item.id === plant.landId
-    );
+first.value="";
 
-    const item = document.createElement("div");
-    item.className = "item";
+first.textContent="Pilih lahan";
 
-    const title = document.createElement("strong");
-    title.textContent = plant.name;
+select.appendChild(first);
 
-    const details = document.createElement("p");
+farmData.lands.forEach(land=>{
 
-    details.textContent =
-      "Lahan: " + (land ? land.name : "-") +
-      "\nTanggal tanam: " + (plant.date || "-") +
-      "\nJumlah: " + (plant.count || "-") +
-      "\nCatatan: " + (plant.notes || "-");
+const option=document.createElement("option");
 
-    const button = document.createElement("button");
-    button.className = "danger";
-    button.textContent = "Hapus Tanaman";
-    button.onclick = ()=>deletePlant(plant.id);
+option.value=land.id;
 
-    item.append(title,details,button);
+option.textContent=land.name;
 
-    plantList.appendChild(item);
-  });
+select.appendChild(option);
+
+});
+
+if(farmData.lands.some(land=>land.id===previous)){
+select.value=previous;
 }
 
-/* EKSPOR */
+const plantList=document.getElementById("plantList");
+
+plantList.innerHTML="";
+
+farmData.plants.forEach(plant=>{
+
+const land=farmData.lands.find(item=>item.id===plant.landId);
+
+const item=document.createElement("div");
+
+item.className="item";
+
+const title=document.createElement("strong");
+
+title.textContent=plant.name;
+
+const details=document.createElement("p");
+
+details.textContent="Lahan: "+(land?land.name:"-")+"\nTanggal tanam: "+(plant.date||"-")+"\nJumlah: "+(plant.count||"-")+"\nCatatan: "+(plant.notes||"-");
+
+const button=document.createElement("button");
+
+button.className="danger";
+
+button.textContent="Hapus Tanaman";
+
+button.onclick=()=>deletePlant(plant.id);
+
+item.append(title,details,button);
+
+plantList.appendChild(item);
+
+});
+
+}
+
+/* EXPORT */
 
 function exportData(){
-  const file = new Blob(
-    [JSON.stringify(farmData,null,2)],
-    {type:"application/json"}
-  );
 
-  const url = URL.createObjectURL(file);
+const file=new Blob([JSON.stringify(farmData,null,2)],{type:"application/json"});
 
-  const link = document.createElement("a");
+const url=URL.createObjectURL(file);
 
-  link.href = url;
-  link.download = "tanicam-data.json";
+const link=document.createElement("a");
 
-  link.click();
+link.href=url;
 
-  URL.revokeObjectURL(url);
+link.download="tanicam-data.json";
+
+link.click();
+
+URL.revokeObjectURL(url);
+
 }
 
-/* HAPUS DATA */
+/* CLEAR */
 
 function clearFarmData(){
-  if(!confirm("Yakin ingin menghapus semua data Farm Management?"))return;
 
-  farmData = {
-    profile:{name:"",location:"",phone:""},
-    lands:[],
-    plants:[]
-  };
+if(!confirm("Yakin ingin menghapus semua data Farm Management?"))return;
 
-  localStorage.removeItem("tanicam_farm");
+farmData={
+profile:{name:"",location:"",phone:""},
+lands:[],
+plants:[]
+};
 
-  renderFarm();
+localStorage.removeItem("tanicam_farm");
 
-  alert("Data Farm Management dihapus.");
+renderFarm();
+
+alert("Data Farm Management dihapus.");
+
 }
 
 loadFarmData();
+
 </script>
 
 </body>
