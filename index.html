@@ -1,70 +1,110 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#176b3a"><title>TaniCam AI</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#176b3a">
+<title>TaniCam AI</title>
 <style>
 *{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#eff7ef;color:#173b25;line-height:1.5}
-header{background:linear-gradient(135deg,#14532d,#219653);color:white;text-align:center;padding:24px 15px 30px;border-radius:0 0 28px 28px}
-header img{width:105px;height:105px;object-fit:contain}header h1{margin:5px 0}main{max-width:720px;margin:auto;padding:16px}
-button{border:0;border-radius:13px;padding:13px;font-size:15px;font-weight:bold;cursor:pointer;background:#176b3a;color:white}
-button:disabled{opacity:.55}.tabs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:17px}.tabs button{background:#dceee0;color:#176b3a}.tabs button.active{background:#14532d;color:white}
-.card{background:white;border-radius:20px;padding:18px;margin-bottom:16px;box-shadow:0 5px 18px #173b2510}h2{font-size:21px;margin:0 0 12px}h3{font-size:17px}
-input,textarea,select{width:100%;padding:13px;margin:7px 0;border:1px solid #d4e0d6;border-radius:12px;font-size:15px;background:white;color:#173b25}textarea{min-height:75px}
-.hidden{display:none!important}.upload-card{border:2px dashed #8cc5a0;border-radius:18px;padding:19px;margin:13px 0;text-align:center;background:#f3fbf5}.upload-icon{font-size:42px}.upload-card button{width:100%;max-width:280px}
-.preview{width:100%;max-height:340px;object-fit:contain;border-radius:15px;margin-top:12px}.primary{width:100%;margin-top:10px}.secondary{background:#e5f1e7;color:#176b3a}.danger{background:#b83232}
-.small{font-size:13px;color:#718073}.result{background:#f0f7f0;padding:14px;border-radius:14px;white-space:pre-wrap;overflow-wrap:anywhere;margin-top:12px}
-.item{border:1px solid #dce8dd;border-radius:13px;padding:12px;margin-top:10px}.item p{white-space:pre-wrap;margin:6px 0}.item button{width:100%;margin-top:7px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.stat{background:#f0f7f0;border-radius:12px;padding:11px}.stat strong{display:block;font-size:22px}
-.task{border-left:5px solid #219653;background:#f5faf6;padding:11px;border-radius:10px;margin:9px 0}.task.late{border-color:#b83232}.task.done{opacity:.65}.task button{padding:9px;font-size:13px}.task small{display:block;color:#718073;margin:3px 0 8px}
-footer{text-align:center;padding:22px;font-size:12px;color:#718073}
-</style></head><body>
-<header><img src="https://raw.githubusercontent.com/kenziealden312-max/tani-cam-ai/main/file_000000001b988211a2bb6efa2009a905.png" alt="TaniCam AI"><h1>TaniCam AI</h1><p>Asisten Petani Indonesia</p></header>
+header{background:linear-gradient(135deg,#14532d,#219653);color:white;text-align:center;padding:22px 15px 28px;border-radius:0 0 28px 28px}
+header img{width:95px;height:95px;object-fit:contain}header h1{margin:4px 0;font-size:28px}main{max-width:760px;margin:auto;padding:14px}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:15px}button{border:0;border-radius:13px;padding:13px;font-size:14px;font-weight:bold;background:#176b3a;color:white;cursor:pointer}
+.tabs button{background:#dceee0;color:#176b3a}.tabs button.active{background:#14532d;color:white}
+.card{background:white;border-radius:20px;padding:17px;margin-bottom:15px;box-shadow:0 4px 16px #173b2510}
+h2{font-size:20px;margin:0 0 12px}h3{font-size:16px;margin:7px 0}
+input,textarea,select{width:100%;padding:13px;margin:6px 0;border:1px solid #d4e0d6;border-radius:12px;font-size:15px;background:white;color:#173b25}
+textarea{min-height:80px}.hidden{display:none!important}.small{font-size:13px;color:#718073}
+.primary{width:100%;margin-top:9px;padding:15px;font-size:15px}.secondary{background:#e5f1e7;color:#176b3a}.danger{background:#b83232}
+.upload{padding:16px;border:2px dashed #8cc5a0;border-radius:16px;margin:10px 0;text-align:center;background:#f3fbf5}
+.preview{width:100%;max-height:300px;object-fit:contain;border-radius:14px;margin-top:10px}.result{background:#f0f7f0;padding:14px;border-radius:13px;white-space:pre-wrap;margin-top:10px;overflow-wrap:anywhere}
+.item{border:1px solid #dce8dd;border-radius:13px;padding:13px;margin-top:10px}.item p{white-space:pre-wrap;overflow-wrap:anywhere}.item button{width:100%;margin-top:8px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.stat{background:#eff7ef;border-radius:14px;padding:12px}.stat strong{display:block;font-size:24px}
+.task{border-left:5px solid #219653;background:#f5faf5;padding:12px;border-radius:10px;margin:8px 0}.task.late{border-color:#b83232}
+footer{text-align:center;padding:20px;color:#718073;font-size:12px}
+</style>
+</head>
+<body>
+<header>
+<img src="https://raw.githubusercontent.com/kenziealden312-max/tani-cam-ai/main/file_000000001b988211a2bb6efa2009a905.png" alt="TaniCam AI">
+<h1>TaniCam AI</h1><p>Asisten Petani Indonesia</p>
+</header>
 <main>
-<div class="tabs"><button id="scanTab" class="active" onclick="showPage('scan')">Scan Tanaman</button><button id="farmTab" onclick="showPage('farm')">Farm Management</button></div>
-<section id="scanPage"><div class="card"><h2>🌿 Periksa Tanaman</h2><p>Foto daun atau tanaman untuk memeriksa kemungkinan masalah.</p>
-<div class="upload-card"><div class="upload-icon">🖼️</div><h3>PILIH FOTO GALERI</h3><p>Gunakan foto yang tersimpan di HP</p><button onclick="galleryInput.click()">BUKA GALERI</button><input id="galleryInput" type="file" accept="image/*" hidden></div>
-<div class="upload-card"><div class="upload-icon">📷</div><h3>AMBIL FOTO</h3><p>Foto tanaman secara langsung</p><button onclick="cameraInput.click()">BUKA KAMERA</button><input id="cameraInput" type="file" accept="image/*" capture="environment" hidden></div>
-<img id="preview" class="preview hidden" alt="Foto tanaman"><p id="fileName" class="small"></p><button id="analyzeBtn" class="primary" onclick="analyzePlant()">🔍 ANALISIS TANAMAN</button><p id="status" class="small"></p><div id="result" class="result hidden"></div></div></section>
+<div class="tabs">
+<button id="tabScan" class="active" onclick="page('scan')">📷 Scan</button>
+<button id="tabFarm" onclick="page('farm')">🌱 Kebun</button>
+<button id="tabChat" onclick="page('chat')">💬 Tanya AI</button>
+</div>
+
+<section id="scanPage">
+<div class="card">
+<h2>Periksa Tanaman</h2>
+<label>Jenis tanaman</label><select id="scanPlant"><option>Kangkung</option><option>Cabai</option></select>
+<label>Tanggal tanam (opsional)</label><input id="scanDate" type="date">
+<textarea id="scanNotes" placeholder="Catatan: misalnya daun menguning, tanah kering..."></textarea>
+<div class="upload"><h3>🖼️ Pilih foto dari galeri</h3><button onclick="galleryInput.click()">Buka Galeri</button><input id="galleryInput" type="file" accept="image/*" hidden></div>
+<div class="upload"><h3>📷 Ambil foto</h3><button onclick="cameraInput.click()">Buka Kamera</button><input id="cameraInput" type="file" accept="image/*" capture="environment" hidden></div>
+<img id="preview" class="preview hidden" alt="Foto tanaman"><p id="filename" class="small"></p>
+<button class="primary" id="scanBtn" onclick="scan()">🔍 Analisis Tanaman</button><p id="scanStatus" class="small"></p><div id="scanResult" class="result hidden"></div>
+</div>
+<div class="card"><h2>🗂️ Riwayat Scan</h2><button class="secondary primary" onclick="loadHistory()">Muat Riwayat dari AI</button><div id="historyList"></div></div>
+</section>
+
 <section id="farmPage" class="hidden">
-<div class="card"><h2>👨‍🌾 Profil Petani</h2><input id="farmerName" placeholder="Nama petani"><input id="farmerLocation" placeholder="Desa / Kecamatan"><input id="farmerPhone" placeholder="Nomor telepon (opsional)"><button class="primary" onclick="saveProfile()">Simpan Profil</button></div>
-<div class="card"><h2>🌱 Data Lahan</h2><input id="landName" placeholder="Nama lahan"><input id="landArea" type="number" min="0" placeholder="Luas lahan (m²)"><input id="landLocation" placeholder="Lokasi lahan"><textarea id="landNotes" placeholder="Catatan lahan"></textarea><button class="primary" onclick="addLand()">Tambah Lahan</button><div id="landList"></div></div>
-<div class="card"><h2>🌿 Tambah Tanaman</h2><label>Jenis tanaman</label><select id="plantName"><option value="Kangkung">🥬 Kangkung</option><option value="Cabai">🌶️ Cabai</option></select><select id="plantLand"><option value="">Pilih lahan</option></select><label>Tanggal tanam / pindah tanam</label><input id="plantDate" type="date"><p class="small">Untuk cabai, masukkan tanggal pindah tanam agar perkiraan panen lebih sesuai.</p><input id="plantCount" type="number" min="0" placeholder="Jumlah tanaman"><textarea id="plantNotes" placeholder="Catatan tanaman"></textarea>
-<h3>Jadwal perawatan</h3><p class="small">Pilih cara menentukan jadwal. Jadwal otomatis adalah perkiraan awal. Kangkung: panen mulai sekitar hari ke-25. Cabai: mulai sekitar hari ke-75 setelah pindah tanam. Sesuaikan dengan cuaca dan kondisi tanaman.</p><select id="scheduleMode" onchange="toggleScheduleMode()"><option value="auto">🌱 Aplikasi menentukan jadwal</option><option value="manual">✍️ Saya menentukan jadwal sendiri</option></select><div id="autoScheduleInfo" class="result">Jadwal rekomendasi akan dibuat berdasarkan jenis tanaman dan tanggal tanam.</div><div id="manualSchedule" class="grid hidden"><div><label>Siram setiap (hari)</label><input id="waterEvery" type="number" min="1" value="1"></div><div><label>Pupuk setiap (hari)</label><input id="fertEvery" type="number" min="1" value="7"></div><div><label>Awasi setiap (hari)</label><input id="inspectEvery" type="number" min="1" value="2"></div><div><label>Panen perkiraan (hari)</label><input id="harvestDays" type="number" min="1" value="30"></div></div><button class="primary" onclick="addPlant()">Tambah Tanaman & Pengingat</button><div id="plantList"></div></div>
-<div class="card"><h2>📊 Dashboard Perawatan</h2><div class="grid"><div class="stat">Tanaman aktif<strong id="statPlants">0</strong></div><div class="stat">Tugas hari ini<strong id="statToday">0</strong></div><div class="stat">Terlambat<strong id="statLate">0</strong></div><div class="stat">Selesai hari ini<strong id="statDone">0</strong></div></div><p class="small">Pengingat tampil saat halaman dibuka. Browser mungkin tidak mengirim notifikasi saat website ditutup.</p></div>
-<div class="card"><h2>🔔 Jadwal Pengingat</h2><select id="taskFilter" onchange="renderTasks()"><option value="all">Semua tugas</option><option value="today">Hari ini dan terlambat</option><option value="upcoming">7 hari ke depan</option><option value="done">Sudah selesai</option></select><div id="taskList"></div></div>
-<div class="card"><h2>💾 Data Tersimpan</h2><p class="small">Data tersimpan di browser perangkat ini dan tidak otomatis tersinkron ke perangkat lain.</p><button class="secondary primary" onclick="exportData()">Ekspor Data JSON</button><button class="danger primary" onclick="clearFarmData()">Hapus Semua Data Farm</button></div>
-</section></main><footer>TaniCam AI · Asisten Petani</footer>
+<div class="card"><h2>👨‍🌾 Profil Petani</h2><input id="farmerName" placeholder="Nama petani"><input id="farmerLocation" placeholder="Desa / Kecamatan"><button class="primary" onclick="saveProfile()">Simpan Profil</button></div>
+<div class="card"><h2>🌱 Data Lahan</h2><input id="landName" placeholder="Nama lahan"><input id="landArea" type="number" placeholder="Luas lahan (m²)"><input id="landLocation" placeholder="Lokasi"><textarea id="landNotes" placeholder="Catatan lahan"></textarea><button class="primary" onclick="addLand()">Tambah Lahan</button><div id="lands"></div></div>
+<div class="card"><h2>🌿 Tambah Tanaman</h2><label>Jenis tanaman</label><select id="plantType"><option>Kangkung</option><option>Cabai</option></select><select id="plantLand"><option value="">Pilih lahan</option></select><label>Tanggal tanam</label><input id="plantDate" type="date"><input id="plantCount" type="number" placeholder="Jumlah tanaman"><textarea id="plantNotes" placeholder="Catatan tanaman"></textarea>
+<h3>Jadwal perawatan</h3><p class="small">Pilih aplikasi untuk membuat rekomendasi awal atau tentukan sendiri. Sesuaikan dengan cuaca dan kondisi tanaman.</p>
+<select id="scheduleMode" onchange="scheduleModeChanged()"><option value="ai">🌱 Aplikasi menentukan jadwal</option><option value="manual">✍️ Saya menentukan jadwal</option></select>
+<div id="scheduleFields" class="hidden">
+<div class="grid"><label>Siram tiap (hari)<input id="waterDays" type="number" min="1" value="1"></label><label>Pupuk tiap (hari)<input id="fertDays" type="number" min="1" value="7"></label><label>Awasi tiap (hari)<input id="inspectDays" type="number" min="1" value="2"></label><label>Panen sekitar (hari)<input id="harvestDays" type="number" min="1" value="25"></label></div>
+</div><div id="scheduleInfo" class="result">AI akan memberi perkiraan jadwal awal berdasarkan jenis dan tanggal tanam. Jadwal perlu disesuaikan dengan kondisi kebun.</div>
+<button class="primary" onclick="addPlant()">Tambah Tanaman & Pengingat</button><div id="plants"></div>
+</div>
+<div class="card"><h2>📊 Dashboard Perawatan</h2><div class="grid"><div class="stat">Tanaman aktif<strong id="activeCount">0</strong></div><div class="stat">Tugas hari ini<strong id="todayCount">0</strong></div><div class="stat">Terlambat<strong id="lateCount">0</strong></div><div class="stat">Selesai hari ini<strong id="doneCount">0</strong></div></div><div id="dashboardTasks"></div></div>
+<div class="card"><h2>🔔 Jadwal Pengingat</h2><select id="taskFilter" onchange="renderFarm()"><option value="7">7 hari ke depan</option><option value="30">30 hari ke depan</option><option value="all">Semua</option></select><div id="taskList"></div><p class="small">Pengingat muncul saat website dibuka. Browser mungkin tidak mengirim notifikasi jika website ditutup.</p></div>
+<div class="card"><h2>💾 Data Tersimpan</h2><p class="small">Data kebun tersimpan di browser perangkat ini. Scan disimpan di server AI.</p><button class="secondary primary" onclick="exportData()">Ekspor JSON</button><button class="danger primary" onclick="clearData()">Hapus Data Kebun</button></div>
+</section>
+
+<section id="chatPage" class="hidden">
+<div class="card"><h2>💬 Tanya TaniCam AI</h2><p class="small">Tanyakan tentang kangkung, cabai, penyiraman, pupuk, gejala daun, dan kondisi tanah. AI dapat memakai beberapa hasil scan terakhir.</p>
+<label>Tanaman</label><select id="chatPlant"><option>Kangkung</option><option>Cabai</option></select>
+<label>Tanggal tanam (opsional)</label><input id="chatDate" type="date">
+<textarea id="chatWater" placeholder="Jadwal/riwayat siram, misalnya 2 kali sehari"></textarea><textarea id="chatFertilizer" placeholder="Jadwal/riwayat pupuk"></textarea><textarea id="chatSoil" placeholder="Kondisi tanah: kering, becek, keras, gembur..."></textarea>
+<textarea id="question" placeholder="Tulis pertanyaan kamu..." rows="4"></textarea><button class="primary" id="chatButton" onclick="askAI()">Kirim Pertanyaan</button><p id="chatStatus" class="small"></p><div id="chatAnswer" class="result hidden"></div></div>
+</section>
+</main><footer>TaniCam AI · Asisten Petani</footer>
 <script>
-const API_URL="https://tani-cam-ai.onrender.com/analyze";let selectedFile=null;
-let farmData={profile:{name:"",location:"",phone:""},lands:[],plants:[],tasks:[]};
-const TYPES={water:["💧","Penyiraman"],fertilize:["🧪","Pemupukan"],inspect:["🔎","Pengawasan hama & penyakit"],harvest:["🧺","Panen"]};
-function showPage(p){scanPage.classList.toggle("hidden",p!=="scan");farmPage.classList.toggle("hidden",p!=="farm");scanTab.classList.toggle("active",p==="scan");farmTab.classList.toggle("active",p==="farm");if(p==="farm")renderFarm();}
-function selectPhoto(f){if(!f)return;if(!f.type.startsWith("image/")){alert("Pilih file gambar.");return;}selectedFile=f;preview.src=URL.createObjectURL(f);preview.classList.remove("hidden");fileName.textContent=f.name;result.classList.add("hidden");status.textContent="Foto siap dianalisis.";}
-galleryInput.addEventListener("change",()=>selectPhoto(galleryInput.files[0]));cameraInput.addEventListener("change",()=>selectPhoto(cameraInput.files[0]));
-async function analyzePlant(){if(!selectedFile){alert("Ambil foto atau pilih gambar terlebih dahulu.");return;}analyzeBtn.disabled=true;status.textContent="Sedang menganalisis tanaman...";result.classList.add("hidden");try{let fd=new FormData();fd.append("image",selectedFile);let r=await fetch(API_URL,{method:"POST",body:fd});let d=await r.json();if(!r.ok)throw Error(d.detail||"Analisis gagal.");result.textContent=typeof d==="string"?d:(d.analysis||d.result||d.message||JSON.stringify(d,null,2));result.classList.remove("hidden");status.textContent="Analisis selesai.";}catch(e){status.textContent="Analisis gagal.";result.textContent="Tidak dapat menghubungi AI.\n"+e.message+"\nPeriksa koneksi dan server.";result.classList.remove("hidden");}finally{analyzeBtn.disabled=false;}}
-function loadFarmData(){try{let s=localStorage.getItem("tanicam_farm");if(s){let x=JSON.parse(s);farmData={profile:x.profile||{name:"",location:"",phone:""},lands:Array.isArray(x.lands)?x.lands:[],plants:Array.isArray(x.plants)?x.plants:[],tasks:Array.isArray(x.tasks)?x.tasks:[]};}}catch(e){console.log(e);}renderFarm();}
-function saveFarmData(){try{localStorage.setItem("tanicam_farm",JSON.stringify(farmData));renderFarm();}catch(e){alert("Gagal menyimpan. Penyimpanan browser mungkin penuh.");}}
-function saveProfile(){farmData.profile={name:farmerName.value.trim(),location:farmerLocation.value.trim(),phone:farmerPhone.value.trim()};saveFarmData();alert("Profil tersimpan.");}
-function addLand(){let n=landName.value.trim();if(!n){alert("Masukkan nama lahan.");return;}farmData.lands.push({id:Date.now().toString(),name:n,area:landArea.value,location:landLocation.value.trim(),notes:landNotes.value.trim()});landName.value="";landArea.value="";landLocation.value="";landNotes.value="";saveFarmData();}
-function deleteLand(id){if(farmData.plants.some(p=>p.landId===id)){alert("Lahan masih dipakai tanaman. Hapus data tanaman dahulu.");return;}if(confirm("Hapus lahan ini?")){farmData.lands=farmData.lands.filter(l=>l.id!==id);saveFarmData();}}
-function days(v,def){let n=parseInt(v,10);return Number.isFinite(n)&&n>0?n:def;}
-function recommendedSchedule(crop){return crop==="Kangkung"?{waterEvery:1,fertEvery:7,inspectEvery:2,harvestDays:25}:{waterEvery:1,fertEvery:14,inspectEvery:2,harvestDays:75};}
-function toggleScheduleMode(){let auto=scheduleMode.value==="auto";autoScheduleInfo.classList.toggle("hidden",!auto);manualSchedule.classList.toggle("hidden",auto);}
-function updateScheduleDefaults(){let r=recommendedSchedule(plantName.value);waterEvery.value=r.waterEvery;fertEvery.value=r.fertEvery;inspectEvery.value=r.inspectEvery;harvestDays.value=r.harvestDays;}
-plantName.addEventListener("change",updateScheduleDefaults);
-function addPlant(){let landId=plantLand.value,date=plantDate.value;if(!landId){alert("Pilih lahan.");return;}if(!date){alert("Pilih tanggal tanam.");return;}let auto=scheduleMode.value==="auto",r=auto?recommendedSchedule(plantName.value):{waterEvery:days(waterEvery.value,1),fertEvery:days(fertEvery.value,7),inspectEvery:days(inspectEvery.value,2),harvestDays:days(harvestDays.value,30)};let p={id:Date.now().toString(),name:plantName.value,landId,date,count:plantCount.value,notes:plantNotes.value.trim(),scheduleMode:auto?"auto":"manual",...r};farmData.plants.push(p);makeTasks(p);plantDate.value="";plantCount.value="";plantNotes.value="";saveFarmData();}
-function plusDate(s,n){let d=new Date(s+"T12:00:00");d.setDate(d.getDate()+n);return d.toISOString().slice(0,10);}
-function makeTasks(p){for(let day=p.waterEvery;day<=p.harvestDays;day+=p.waterEvery)addTask(p,"water",plusDate(p.date,day));for(let day=p.fertEvery;day<=p.harvestDays;day+=p.fertEvery)addTask(p,"fertilize",plusDate(p.date,day));for(let day=p.inspectEvery;day<=p.harvestDays;day+=p.inspectEvery)addTask(p,"inspect",plusDate(p.date,day));addTask(p,"harvest",plusDate(p.date,p.harvestDays));}
-function addTask(p,type,due){farmData.tasks.push({id:Date.now().toString()+Math.random().toString(36).slice(2,8),plantId:p.id,type,due,done:false,doneAt:""});}
-function deletePlant(id){if(!confirm("Hapus tanaman dan semua jadwalnya?"))return;farmData.plants=farmData.plants.filter(p=>p.id!==id);farmData.tasks=farmData.tasks.filter(t=>t.plantId!==id);saveFarmData();}
-function today(){return new Date().toLocaleDateString("en-CA");}
-function dateText(s){return s?new Date(s+"T12:00:00").toLocaleDateString("id-ID",{day:"numeric",month:"short",year:"numeric"}):"-";}
-function renderFarm(){let p=farmData.profile||{};farmerName.value=p.name||"";farmerLocation.value=p.location||"";farmerPhone.value=p.phone||"";renderLands();renderPlants();renderTasks();}
-function renderLands(){landList.innerHTML="";farmData.lands.forEach(l=>{let e=document.createElement("div");e.className="item";let b=document.createElement("button");b.className="danger";b.textContent="Hapus Lahan";b.onclick=()=>deleteLand(l.id);e.innerHTML="";let s=document.createElement("strong");s.textContent=l.name;let p=document.createElement("p");p.textContent=`Luas: ${l.area||"-"} m²\nLokasi: ${l.location||"-"}\nCatatan: ${l.notes||"-"}`;e.append(s,p,b);landList.append(e);});let old=plantLand.value;plantLand.innerHTML='<option value="">Pilih lahan</option>';farmData.lands.forEach(l=>{let o=document.createElement("option");o.value=l.id;o.textContent=l.name;plantLand.append(o);});if(farmData.lands.some(l=>l.id===old))plantLand.value=old;}
-function renderPlants(){plantList.innerHTML="";farmData.plants.forEach(p=>{let l=farmData.lands.find(x=>x.id===p.landId),e=document.createElement("div");e.className="item";let s=document.createElement("strong");s.textContent=(p.name==="Kangkung"?"🥬 ":"🌶️ ")+p.name;let d=document.createElement("p");d.textContent=`Lahan: ${l?l.name:"-"}\nTanggal tanam: ${dateText(p.date)}\nJumlah: ${p.count||"-"}\nCatatan: ${p.notes||"-"}\nSiram ${p.waterEvery||1} hari · Pupuk ${p.fertEvery||7} hari · Pengawasan ${p.inspectEvery||2} hari · Panen sekitar ${p.harvestDays||30} hari`;let b=document.createElement("button");b.className="danger";b.textContent="Hapus Tanaman & Jadwal";b.onclick=()=>deletePlant(p.id);e.append(s,d,b);plantList.append(e);});}
-function renderTasks(){taskList.innerHTML="";let now=today(),week=plusDate(now,7),filter=taskFilter.value,all=[...farmData.tasks].sort((a,b)=>a.due.localeCompare(b.due)),pending=all.filter(t=>!t.done&&t.due<=now),late=pending.filter(t=>t.due<now),done=all.filter(t=>t.done&&t.doneAt===now);statPlants.textContent=farmData.plants.length;statToday.textContent=pending.length;statLate.textContent=late.length;statDone.textContent=done.length;let list=all.filter(t=>filter==="all"||(filter==="today"&&!t.done&&t.due<=now)||(filter==="upcoming"&&!t.done&&t.due>now&&t.due<=week)||(filter==="done"&&t.done));if(!list.length){taskList.textContent="Tidak ada tugas pada pilihan ini.";return;}list.forEach(t=>{let p=farmData.plants.find(x=>x.id===t.plantId),typ=TYPES[t.type]||["📌",t.type],e=document.createElement("div");e.className="task"+(t.done?" done":t.due<now?" late":"");let s=document.createElement("strong");s.textContent=typ[0]+" "+typ[1]+" — "+(p?p.name:"Tanaman");let small=document.createElement("small");small.textContent="Jadwal: "+dateText(t.due)+(p?" · Lahan: "+((farmData.lands.find(l=>l.id===p.landId)||{}).name||"-"):"");let b=document.createElement("button");b.className=t.done?"secondary":"";b.textContent=t.done?"✓ Selesai (batalkan)":"Tandai selesai";b.onclick=()=>{t.done=!t.done;t.doneAt=t.done?now:"";saveFarmData();};e.append(s,small,b);taskList.append(e);});}
-function exportData(){let blob=new Blob([JSON.stringify(farmData,null,2)],{type:"application/json"}),u=URL.createObjectURL(blob),a=document.createElement("a");a.href=u;a.download="tanicam-data.json";a.click();setTimeout(()=>URL.revokeObjectURL(u),1000);}
-function clearFarmData(){if(!confirm("Yakin hapus semua data Farm Management?"))return;farmData={profile:{name:"",location:"",phone:""},lands:[],plants:[],tasks:[]};localStorage.removeItem("tanicam_farm");renderFarm();alert("Data Farm Management dihapus.");}
-loadFarmData();toggleScheduleMode();updateScheduleDefaults();
-</script></body></html>
+const API="https://tani-cam-ai.onrender.com";
+let selectedFile=null;
+let farm={profile:{name:"",location:""},lands:[],plants:[],tasks:[]};
+const $=id=>document.getElementById(id);
+function page(p){["scan","farm","chat"].forEach(x=>{$(x+"Page").classList.toggle("hidden",x!==p);$("tab"+x[0].toUpperCase()+x.slice(1)).classList.toggle("active",x===p)});if(p==="farm")renderFarm()}
+function photo(f){if(!f)return;if(!f.type.startsWith("image/"))return alert("Pilih file gambar.");selectedFile=f;$("preview").src=URL.createObjectURL(f);$("preview").classList.remove("hidden");$("filename").textContent=f.name;$("scanStatus").textContent="Foto siap dianalisis."}
+$("galleryInput").addEventListener("change",e=>photo(e.target.files[0]));$("cameraInput").addEventListener("change",e=>photo(e.target.files[0]));
+async function scan(){if(!selectedFile)return alert("Pilih foto terlebih dahulu.");$("scanBtn").disabled=true;$("scanStatus").textContent="AI sedang menganalisis...";$("scanResult").classList.add("hidden");try{let f=new FormData();f.append("image",selectedFile);f.append("plant",$("scanPlant").value);f.append("planted_date",$("scanDate").value);f.append("notes",$("scanNotes").value);let r=await fetch(API+"/analyze",{method:"POST",body:f});let d=await r.json();if(!r.ok)throw Error(d.detail||"Analisis gagal");$("scanResult").textContent=d.analysis;$("scanResult").classList.remove("hidden");$("scanStatus").textContent="Analisis selesai dan riwayat dikirim ke server.";loadHistory()}catch(e){$("scanStatus").textContent="Analisis gagal: "+e.message}finally{$("scanBtn").disabled=false}}
+async function loadHistory(){let el=$("historyList");el.textContent="Memuat...";try{let r=await fetch(API+"/history?limit=30");let d=await r.json();el.innerHTML="";(d.items||[]).forEach(x=>{let div=document.createElement("div");div.className="item";let b=document.createElement("strong");b.textContent=x.plant+" · "+new Date(x.date).toLocaleString("id-ID");let p=document.createElement("p");p.textContent=x.analysis||"";div.append(b,p);el.append(div)});if(!d.items?.length)el.textContent="Belum ada scan tersimpan."}catch(e){el.textContent="Riwayat belum bisa dimuat. Periksa koneksi/server."}}
+function scheduleModeChanged(){$("scheduleFields").classList.toggle("hidden",$("scheduleMode").value!=="manual");$("scheduleInfo").textContent=$("scheduleMode").value==="ai"?"Aplikasi membuat perkiraan awal. Kangkung umumnya mulai panen sekitar 25–30 hari; cabai perlu waktu jauh lebih lama. Sesuaikan dengan varietas, cuaca, dan kondisi kebun.":"Isi jadwal sendiri sesuai pengalaman dan kondisi kebun."}
+function save(){localStorage.setItem("tanicam_farm",JSON.stringify(farm));renderFarm()}
+function load(){try{let d=JSON.parse(localStorage.getItem("tanicam_farm")||"{}");farm={profile:d.profile||{name:"",location:""},lands:Array.isArray(d.lands)?d.lands:[],plants:Array.isArray(d.plants)?d.plants:[],tasks:Array.isArray(d.tasks)?d.tasks:[]}}catch(e){}renderFarm()}
+function saveProfile(){farm.profile={name:$("farmerName").value.trim(),location:$("farmerLocation").value.trim()};save();alert("Profil tersimpan")}
+function addLand(){let name=$("landName").value.trim();if(!name)return alert("Isi nama lahan");farm.lands.push({id:Date.now()+"",name,area:$("landArea").value,location:$("landLocation").value,notes:$("landNotes").value});["landName","landArea","landLocation","landNotes"].forEach(x=>$(x).value="");save()}
+function addPlant(){let landId=$("plantLand").value;if(!landId)return alert("Tambah dan pilih lahan terlebih dahulu");let type=$("plantType").value,date=$("plantDate").value;if(!date)return alert("Isi tanggal tanam");let auto=$("scheduleMode").value==="ai";let defaults=type==="Kangkung"?{water:1,fert:7,inspect:2,harvest:28}:{water:1,fert:14,inspect:2,harvest:75};let vals=auto?defaults:{water:+$("waterDays").value||1,fert:+$("fertDays").value||7,inspect:+$("inspectDays").value||2,harvest:+$("harvestDays").value||28};let plant={id:Date.now()+"",name:type,landId,date,count:$("plantCount").value,notes:$("plantNotes").value,schedule:vals,mode:auto?"ai":"manual"};farm.plants.push(plant);let base=new Date(date+"T12:00:00");for(let [typeKey,days] of [["water",vals.water],["fert",vals.fert],["inspect",vals.inspect],["harvest",vals.harvest]]){let due=new Date(base);due.setDate(due.getDate()+days);farm.tasks.push({id:plant.id+"-"+typeKey,plantId:plant.id,type:typeKey,due:due.toISOString().slice(0,10),done:false})}["plantDate","plantCount","plantNotes"].forEach(x=>$(x).value="");save();alert("Tanaman dan jadwal awal tersimpan. Periksa jadwal sesuai cuaca dan kondisi tanaman.")}
+function delPlant(id){if(!confirm("Hapus tanaman dan pengingatnya?"))return;farm.plants=farm.plants.filter(x=>x.id!==id);farm.tasks=farm.tasks.filter(x=>x.plantId!==id);save()}
+function delLand(id){if(farm.plants.some(p=>p.landId===id))return alert("Hapus tanaman di lahan ini dahulu");if(confirm("Hapus lahan?")){farm.lands=farm.lands.filter(x=>x.id!==id);save()}}
+const taskNames={water:"Penyiraman",fert:"Pemupukan",inspect:"Pengawasan tanaman",harvest:"Periksa/panen"};
+function dateStr(d){return d.toISOString().slice(0,10)}
+function renderFarm(){if(!$("farmerName"))return;$("farmerName").value=farm.profile.name||"";$("farmerLocation").value=farm.profile.location||"";
+$("plantLand").innerHTML='<option value="">Pilih lahan</option>';farm.lands.forEach(l=>{let o=document.createElement("option");o.value=l.id;o.textContent=l.name;$("plantLand").append(o)});
+$("lands").innerHTML="";farm.lands.forEach(l=>{let d=document.createElement("div");d.className="item";d.innerHTML="";let s=document.createElement("strong");s.textContent=l.name;let p=document.createElement("p");p.textContent=`Luas: ${l.area||"-"} m² · Lokasi: ${l.location||"-"}\n${l.notes||""}`;let b=document.createElement("button");b.className="danger";b.textContent="Hapus lahan";b.onclick=()=>delLand(l.id);d.append(s,p,b);$("lands").append(d)});
+$("plants").innerHTML="";farm.plants.forEach(p=>{let land=farm.lands.find(l=>l.id===p.landId);let d=document.createElement("div");d.className="item";let s=document.createElement("strong");s.textContent=p.name;let t=p.schedule||{};let q=document.createElement("p");q.textContent=`Lahan: ${land?.name||"-"}\nTanggal tanam: ${p.date}\nJumlah: ${p.count||"-"}\nSiram tiap ${t.water||1} hari · Pupuk tiap ${t.fert||7} hari · Awasi tiap ${t.inspect||2} hari · Periksa panen sekitar ${t.harvest||"-"} hari\n${p.notes||""}`;let b=document.createElement("button");b.className="danger";b.textContent="Hapus tanaman & jadwal";b.onclick=()=>delPlant(p.id);d.append(s,q,b);$("plants").append(d)});
+let today=dateStr(new Date()),future=new Date();future.setDate(future.getDate()+7);let tasks=farm.tasks.filter(t=>!t.done).sort((a,b)=>a.due.localeCompare(b.due));let todayTasks=tasks.filter(t=>t.due===today),late=tasks.filter(t=>t.due<today);$("activeCount").textContent=farm.plants.length;$("todayCount").textContent=todayTasks.length;$("lateCount").textContent=late.length;$("doneCount").textContent=farm.tasks.filter(t=>t.done&& t.doneDate===today).length;
+$("dashboardTasks").innerHTML="";[...late,...todayTasks].slice(0,8).forEach(t=>taskElement(t,$("dashboardTasks")));
+let filt=$("taskFilter").value||"7";let max=filt==="all"?null:new Date();if(max)max.setDate(max.getDate()+Number(filt));let visible=tasks.filter(t=>!max||t.due<=dateStr(max));$("taskList").innerHTML="";visible.forEach(t=>taskElement(t,$("taskList")));if(!visible.length)$("taskList").textContent="Tidak ada tugas pada pilihan ini."}
+function taskElement(t,container){let p=farm.plants.find(x=>x.id===t.plantId);let d=document.createElement("div");d.className="task"+(t.due<dateStr(new Date())?" late":"");let b=document.createElement("strong");b.textContent=(p?.name||"Tanaman")+" · "+(taskNames[t.type]||t.type);let txt=document.createElement("p");txt.textContent="Tanggal: "+t.due;let btn=document.createElement("button");btn.className="secondary";btn.textContent="Tandai selesai";btn.onclick=()=>{t.done=true;t.doneDate=dateStr(new Date());save()};d.append(b,txt,btn);container.append(d)}
+function exportData(){let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(farm,null,2)],{type:"application/json"}));a.download="tanicam-data.json";a.click();URL.revokeObjectURL(a.href)}
+function clearData(){if(!confirm("Hapus semua data kebun di browser ini?"))return;farm={profile:{name:"",location:""},lands:[],plants:[],tasks:[]};localStorage.removeItem("tanicam_farm");renderFarm()}
+async function askAI(){let q=$("question").value.trim();if(!q)return alert("Tulis pertanyaan");$("chatButton").disabled=true;$("chatStatus").textContent="AI sedang menjawab...";$("chatAnswer").classList.add("hidden");try{let f=new FormData();f.append("question",q);f.append("plant",$("chatPlant").value);f.append("planted_date",$("chatDate").value);f.append("watering",$("chatWater").value);f.append("fertilizing",$("chatFertilizer").value);f.append("soil",$("chatSoil").value);let r=await fetch(API+"/chat",{method:"POST",body:f});let d=await r.json();if(!r.ok)throw Error(d.detail||"Gagal");$("chatAnswer").textContent=d.answer;$("chatAnswer").classList.remove("hidden");$("chatStatus").textContent="Jawaban AI";}catch(e){$("chatStatus").textContent="AI belum bisa menjawab: "+e.message}finally{$("chatButton").disabled=false}}
+load();scheduleModeChanged();
+</script>
+</body></html>
