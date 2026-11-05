@@ -18,7 +18,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+MODEL = os.getenv("GEMINI_MODEL", "gemini-3.8-flash")
 # Render's filesystem may reset on redeploy. Set DATA_DIR to a mounted persistent
 # disk path in Render if you want scan history to survive redeploys.
 DATA_DIR = Path(os.getenv("DATA_DIR", "/var/data"))
