@@ -101,7 +101,7 @@ async def ask_gemini(contents):
 @app.post("/analyze")
 async def analyze(
     image: UploadFile = File(...),
-    plant: str = Form(default="Tanaman tidak diketahui"),
+    plant: str = Form(default="Identifikasi otomatis dari foto"),
     planted_date: str = Form(default=""),
     notes: str = Form(default=""),
 ):
@@ -115,20 +115,29 @@ async def analyze(
         raise HTTPException(status_code=413, detail="Ukuran foto maksimal 10 MB.")
 
     prompt = f"""
-Kamu TaniCam AI, asisten budidaya tanaman untuk petani Indonesia.
-Tanaman: {plant}
+Kamu TaniCam AI, asisten pertanian untuk berbagai jenis tanaman di Indonesia,
+bukan hanya cabai dan kangkung.
+Tanaman yang dipilih pengguna: {plant}
 Tanggal tanam: {planted_date or "belum diketahui"}
-Catatan: {notes or "tidak ada"}
+Catatan petani: {notes or "tidak ada"}
 
-Analisis foto dengan hati-hati. Jawab bahasa Indonesia sederhana, maksimal 180 kata:
-1. Kondisi yang terlihat
-2. Dugaan masalah dan tingkat kepastian
-3. Air: kemungkinan kurang/lebih dan cara cek tanah
-4. Nutrisi/pupuk: saran umum, jangan mengarang dosis
-5. Langkah berikut dan kapan foto ulang
+Jika nama tanaman tidak diketahui atau pengguna meminta identifikasi otomatis,
+perkirakan jenis tanaman dari foto. Sebutkan ciri visual yang mendukung identifikasi
+dan tingkat keyakinan. Jika foto tidak cukup jelas, jangan menebak secara pasti;
+minta foto seluruh tanaman, batang, daun, bunga, atau buah.
+
+Analisis tanaman pangan, sayuran, buah, tanaman hias, tanaman obat, dan perkebunan.
+Sesuaikan saran dengan tanaman yang teridentifikasi.
+Jawab bahasa Indonesia sederhana dan maksimal sekitar 220 kata:
+1. Identifikasi tanaman atau beberapa kemungkinan
+2. Kondisi yang terlihat
+3. Dugaan hama, penyakit, atau gangguan dan tingkat kepastian
+4. Saran perawatan: air, cahaya, nutrisi, dan media/tanah bila relevan
+5. Langkah berikut dan kapan perlu foto ulang
 
 Foto tidak bisa memastikan kelembapan, pH, atau unsur hara tanah.
-Jangan menyebut dugaan sebagai diagnosis pasti atau menyarankan pestisida spesifik tanpa bukti.
+Jangan menyebut dugaan sebagai diagnosis pasti. Jangan memberi dosis pupuk
+atau pestisida spesifik jika jenis tanaman, umur, dan kondisi belum cukup jelas.
 """
     contents = [
         {"type": "text", "text": prompt},
@@ -154,7 +163,7 @@ def history(limit: int = 30):
 @app.post("/chat")
 async def chat(
     question: str = Form(...),
-    plant: str = Form(default="Kangkung atau cabai"),
+    plant: str = Form(default="Berbagai jenis tanaman"),
     planted_date: str = Form(default=""),
     watering: str = Form(default=""),
     fertilizing: str = Form(default=""),
@@ -173,19 +182,22 @@ async def chat(
     ) or "Belum ada riwayat scan."
 
     prompt = f"""
-Kamu TaniCam AI, asisten budidaya kangkung dan cabai untuk petani Indonesia.
-Jawab sederhana dan praktis.
+Kamu TaniCam AI, asisten pertanian untuk berbagai jenis tanaman di Indonesia.
+Kamu bisa membantu tanaman pangan, sayuran, buah, tanaman hias, tanaman obat,
+dan perkebunan. Jawab sederhana, praktis, dan sesuaikan saran dengan jenis
+serta umur tanaman.
 Tanaman: {plant}
 Tanggal tanam: {planted_date or "belum diketahui"}
 Siram: {watering or "belum dicatat"}
 Pupuk: {fertilizing or "belum dicatat"}
-Tanah: {soil or "belum dicatat"}
+Tanah/media: {soil or "belum dicatat"}
 Riwayat scan terakhir:
 {context}
 Pertanyaan petani: {question}
 
-Berikan langkah yang bisa dilakukan dan apa yang perlu dicek langsung.
-Jangan mengklaim foto bisa mengukur kadar air, pH, atau unsur hara.
-Jangan memberi dosis pupuk/pestisida spesifik jika data belum cukup.
+Jika jenis tanaman belum jelas, tanyakan nama atau cirinya sebelum memberi
+rekomendasi sangat spesifik. Berikan langkah yang bisa dilakukan dan apa yang
+perlu dicek langsung. Jangan mengklaim foto bisa mengukur kadar air, pH, atau
+unsur hara. Jangan memberi dosis pupuk/pestisida spesifik jika data belum cukup.
 """
     return {"success": True, "answer": await ask_gemini(prompt)}
